@@ -99,7 +99,7 @@ void main(){
 	//supprimer(&liste);
 	afficheListe(liste);
 	printf("\n");
-	//printf("%d ", recherche(13,liste));
+	//printf("%d ", rrecherche(13,liste));
 
 }
 
