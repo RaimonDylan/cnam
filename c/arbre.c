@@ -121,9 +121,11 @@ void parcours_largeur(struct maillon *tete){
 }
 
 
+#define couleur(param) printf("\033[%sm",param)
 
 
 void main(){
+	printf("\033[H\033[2J");
 	struct noeud *racine = NULL;
 	insere(20,&racine);
 	insere(17,&racine);
@@ -132,15 +134,21 @@ void main(){
 	insere(18,&racine);
 	insere(23,&racine);
 	insere(33,&racine);
-	printf("Parcours de mon arbre par la gauche : \n");
+	couleur("7");
+	printf("Parcours de mon arbre par la gauche :\n");
+	couleur("0");
 	parcours_g_pre(racine);
 	printf("\n");
 
-	printf("Parcours de mon arbre par la droite : \n");
+	couleur("7");
+	printf("Parcours de mon arbre par la droite :\n");
+	couleur("0");
 	parcours_d_pre(racine);
 	printf("\n");
 
+	couleur("7");
 	printf("Parcours de mon arbre par largeur : \n");
+	couleur("0");
 	struct maillon *tete=NULL;
 	struct maillon *queue=NULL;
 	enfiler(racine,&tete,&queue);
