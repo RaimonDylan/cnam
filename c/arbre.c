@@ -2,26 +2,58 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 struct noeud
 {
 	int valeur;
 	struct noeud *fg, *fd;
 };
-
 void parcours_g_pre(struct noeud *racine){
 	if(racine !=NULL){
-		parcours_g_pre(racine->fg);
 		printf("%d ",racine->valeur);
+		parcours_g_pre(racine->fg);
 		parcours_g_pre(racine->fd);
 	}
 }
 
 void parcours_d_pre(struct noeud *racine){
 	if(racine !=NULL){
-		parcours_d_pre(racine->fd);
 		printf("%d ",racine->valeur);
+		parcours_d_pre(racine->fd);
 		parcours_d_pre(racine->fg);
+	}
+}
+
+void parcours_g_inf(struct noeud *racine){
+	if(racine !=NULL){
+		parcours_g_inf(racine->fg);
+		printf("%d ",racine->valeur);
+		parcours_g_inf(racine->fd);
+	}
+}
+
+void parcours_d_inf(struct noeud *racine){
+	if(racine !=NULL){
+		parcours_d_inf(racine->fd);
+		printf("%d ",racine->valeur);
+		parcours_d_inf(racine->fg);
+	}
+}
+
+void parcours_g_post(struct noeud *racine){
+	if(racine !=NULL){
+		parcours_g_post(racine->fg);
+		parcours_g_post(racine->fd);
+		printf("%d ",racine->valeur);
+	}
+}
+
+void parcours_d_post(struct noeud *racine){
+	if(racine !=NULL){
+		parcours_d_post(racine->fd);
+		parcours_d_post(racine->fg);
+		printf("%d ",racine->valeur);
 	}
 }
 
@@ -127,23 +159,22 @@ void parcours_largeur(struct maillon *tete){
 void main(){
 	printf("\033[H\033[2J"); // clear dans la console linux 
 	struct noeud *racine = NULL;
-	insere(20,&racine);
-	insere(17,&racine);
-	insere(28,&racine);
-	insere(1,&racine);
-	insere(18,&racine);
-	insere(23,&racine);
-	insere(33,&racine);
+	// CREATION DE L'ARBRE
+	for (int i = 0; i < 20; ++i)
+	{
+		int nb_alea = rand()%(100);
+		insere(nb_alea,&racine);
+	}
 	couleur("7"); // inversion de la couleur et du fond
-	printf("Parcours de mon arbre par la gauche :\n");
+	printf("Parcours de mon arbre par la gauche inf :\n");
 	couleur("0");
-	parcours_g_pre(racine);
+	parcours_g_inf(racine);
 	printf("\n");
 
 	couleur("7");
-	printf("Parcours de mon arbre par la droite :\n");
+	printf("Parcours de mon arbre par la droite inf :\n");
 	couleur("0");
-	parcours_d_pre(racine);
+	parcours_d_inf(racine);
 	printf("\n");
 
 	couleur("7");
