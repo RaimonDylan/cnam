@@ -11,9 +11,17 @@ struct noeud
 
 void parcours_g_pre(struct noeud *racine){
 	if(racine !=NULL){
-		printf("%d ",racine->valeur);
 		parcours_g_pre(racine->fg);
+		printf("%d ",racine->valeur);
 		parcours_g_pre(racine->fd);
+	}
+}
+
+void parcours_d_pre(struct noeud *racine){
+	if(racine !=NULL){
+		parcours_d_pre(racine->fd);
+		printf("%d ",racine->valeur);
+		parcours_d_pre(racine->fg);
 	}
 }
 
@@ -106,7 +114,6 @@ void parcours_largeur(struct maillon *tete){
 				printf("%d ",noeud->valeur);
 			}
 		}
-		printf("\n");
 		if(tete2!=NULL){
 			parcours_largeur(tete2);
 		}
@@ -128,11 +135,15 @@ void main(){
 	printf("Parcours de mon arbre par la gauche : \n");
 	parcours_g_pre(racine);
 	printf("\n");
+
+	printf("Parcours de mon arbre par la droite : \n");
+	parcours_d_pre(racine);
+	printf("\n");
+
 	printf("Parcours de mon arbre par largeur : \n");
 	struct maillon *tete=NULL;
 	struct maillon *queue=NULL;
 	enfiler(racine,&tete,&queue);
-	printf("\n");
 	parcours_largeur(tete);
 /*	printf("Parcours de ma file : \n");
 	enfiler(racine,&tete,&queue);
