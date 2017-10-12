@@ -84,25 +84,6 @@ struct noeud *defiler(struct maillon **tete){
 	}
 }
 
-void parcours_largeur(struct maillon **tete, struct maillon **queue){
-	if(*tete!=NULL){
-
-		struct noeud *noeud;
-		struct maillon *tete2=NULL;
-		struct maillon *queue2=NULL;
-		while(*tete!=NULL){
-			noeud = defiler(&(*tete));
-			enfiler(noeud->fg,&tete2,&queue2);
-			enfiler(noeud->fd,&tete2,&queue2);
-			printf("%d ",noeud->valeur);
-		}
-		if(tete2!=NULL){
-			parcours_largeur(&tete2,&queue2);
-		}
-	}
-	
-}
-
 void afficheListe(struct maillon *liste){
 	while(liste!= NULL){
 		printf("%d ", liste->noeud->valeur);
@@ -110,14 +91,38 @@ void afficheListe(struct maillon *liste){
 	}
 }
 
+void parcours_largeur(struct maillon *tete){
+	if(tete!=NULL){
+		struct noeud *noeud;
+		struct maillon *tete2=NULL;
+		struct maillon *queue2=NULL;
+		while(tete!=NULL){
+			noeud = defiler(&tete);
+			if(noeud!=NULL){
+				if(noeud->fg!=NULL)
+					enfiler(noeud->fg,&tete2,&queue2);
+				if(noeud->fd!=NULL)
+					enfiler(noeud->fd,&tete2,&queue2);
+				printf("%d ",noeud->valeur);
+			}
+		}
+		printf("\n");
+		if(tete2!=NULL){
+			parcours_largeur(tete2);
+		}
+	}
+}
+
+
+
 
 void main(){
 	struct noeud *racine = NULL;
 	insere(20,&racine);
 	insere(17,&racine);
 	insere(28,&racine);
-	insere(4,&racine);
-	insere(10,&racine);
+	insere(1,&racine);
+	insere(18,&racine);
 	insere(23,&racine);
 	insere(33,&racine);
 	printf("Parcours de mon arbre par la gauche : \n");
@@ -127,9 +132,8 @@ void main(){
 	struct maillon *tete=NULL;
 	struct maillon *queue=NULL;
 	enfiler(racine,&tete,&queue);
-	afficheListe(tete);
 	printf("\n");
-	parcours_largeur(&tete,&queue);
+	parcours_largeur(tete);
 /*	printf("Parcours de ma file : \n");
 	enfiler(racine,&tete,&queue);
 	enfiler(racine->fg,&tete,&queue);
