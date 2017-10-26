@@ -13,3 +13,9 @@ xlabel('Axe x')
 
 subplot(2,3,6)
 plot(x,sqrt(x))
+
+#FIGURE 2
+
+figure(2)
+x=linspace(0.1,exp(2),100);
+plot(x,log(x));
