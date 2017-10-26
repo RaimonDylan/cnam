@@ -1,23 +1,34 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <signal.h>
+#include <sys/wait.h>
 const char * quiSuisJe=NULL;
 
-#define couleur(param) printf("\033[%sm",param) 
 
 int main(){
 	printf("\033[H\033[2J"); // clear dans la console linux 
 	pid_t pid ;
-	quiSuisJe= "le père";
+	int status ;
 	pid=fork();
 	if (pid==0){
-		quiSuisJe="le fils";
-		couleur("7"); // inversion de la couleur et du fond
-		printf("je suis %s\n", quiSuisJe);
+		for (int i=0;i<=100; i++){
+			if(i%2 == 0){
+				printf("enfant : %d\n",i );
+				kill(getppid(),SIGUSR1);
+				pause();
+			}
+
+		}
 	}
 	else{
-		printf("je suis %s\n", quiSuisJe);
+			for (int i=0;i<=100; i++){
+				if(i%2==1){
+					pause();
+					printf("papa : %d\n",i );
+					kill(0,SIGUSR1);
+				}
+			}
 	}
-	couleur("0");
 	return 0;
 }
