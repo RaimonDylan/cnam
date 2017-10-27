@@ -11,26 +11,14 @@ int main(){
 	pid_t pid ;
 	int status ;
 	pid=fork();
+	wait(0);
 	if (pid==0){
-		for (int i=0;i<=100; i++){
-			if(i%2 == 0){
-				printf("enfant : %d\n",i );
-				kill(getppid(),SIGUSR1);
-				pause();
-			}
-
-		}
+		for (int i=0;i<=50; i++)
+			printf("enfant : %d\n",i );
 	}
 	else{
-		printf("%d\n",pid );
-			for (int i=0;i<=100; i++){
-				if(i%2==1){
-					printf("%d\n",pid );
-					pause();
+			for (int i=51;i<=100; i++)
 					printf("papa : %d\n",i );
-					kill(pid,SIGUSR1);
-				}
-			}
 	}
 	return 0;
 }
