@@ -47,7 +47,9 @@ void chemin(int d,int val_p,int *pred){
 	for (int i = 5; i >= 0; --i)
 	{
 		if(tab[i]!=0){
+			couleur("32");
 			printf("%d",tab[i]);
+			couleur("0");
 			if(tab[i] != d+1)
 				printf(" -> ");
 		}
