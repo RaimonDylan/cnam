@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
         infosAddrLoc.sin_family=AF_INET;
 
         /* 4.2. Mise à jour du numéro de port local après avoir fait la conversion en format réseau */
-        
+
         infosAddrLoc.sin_port=htons(1234);
 
         infosAddrLoc.sin_addr.s_addr = htonl(INADDR_ANY);  /* 4.3. Que fait-on ici  ? */  
@@ -114,7 +114,15 @@ int main(int argc, char *argv[]){
         if(recv(new_fd,msgRecu, sizeof(msgRecu), 0) == -1){
             printf("recv RETURN -1\n");
             printf("MESSAGE : %s\n",strerror(errno));
-        }else printf("%s\n",msgRecu );
+        }else{
+            // MESSAGE RECU EN MAJUSCULE
+            char mot[1000];
+            for (int i=0; i<strlen(msgRecu); i++) {
+                 mot[i]=toupper(msgRecu[i]);
+            }
+            printf("%s\n",mot);
+        } 
 
         /* 11. Fermeture de la socket */
         close(sockLoc) ;
+}
