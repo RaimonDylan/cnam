@@ -19,23 +19,43 @@ struct noeud
 	struct noeud *fg, *fd;
 };
 
+struct noeud *gauche(struct noeud *racine){
+	if(racine!=NULL){
+		if(racine->fg == NULL)
+			return racine;
+		else
+			gauche(racine->fg);
+	}
+}
+
+
 void parcours(struct noeud **racine,struct noeud *origin){
-	if(*racine !=NULL){ 
+	while(*racine !=NULL){ 
+		if(*racine == origin){
+			couleur("32");
+			printf("   - ");
+			couleur("0");
+		}
 		if((*racine)->fd != NULL && ((*racine)->fd)->valeur != -1){
 			printf("%d",1);
-			parcours(&((*racine)->fd),origin);
+			*racine = (*racine)->fd;
 		}
-		if((*racine)->fd == NULL && (*racine)->valeur != -1){
+		else if((*racine)->fd == NULL && (*racine)->valeur != -1){
 			couleur("32");
 			printf(" -> ");
 			couleur("0");
 			printf("%c\n",(*racine)->valeur);
-			(*racine)->valeur = -1;
-				parcours(&origin,origin);
+			if(*racine != gauche(origin)){
+				(*racine)->valeur = -1;
+				*racine = origin;
+			}
+			else
+				*racine = NULL;
 		}else{
 			if((*racine)->fg != NULL){
+				(*racine)->valeur = -1;
 				printf("%d",0 );
-				parcours(&((*racine)->fg),origin);
+				*racine = (*racine)->fg;
 			}
 		}
 	}
@@ -43,8 +63,8 @@ void parcours(struct noeud **racine,struct noeud *origin){
 
 void parcours_g_pre(struct noeud *racine){
 	if(racine !=NULL){
-		parcours_g_pre(racine->fg);
 		printf("%d ",racine->valeur);
+		parcours_g_pre(racine->fg);
 		parcours_g_pre(racine->fd);
 	}
 }
@@ -87,6 +107,9 @@ void afficheListe(struct maillon *liste){
 	couleur("0");
 	printf("\n");
 	while(liste!= NULL){
+		couleur("32");
+		printf("   - ");
+		couleur("0");
 		printf(" nombre de %c", liste->caractere);
 		printf(" : ");
 		couleur("32");
@@ -183,7 +206,7 @@ void insereNoeud(int val,int car1, int car2,struct noeud **racine){
 		new2->fd = NULL;
 		new->fg = new1;
 		new->fd = new2;
-		*racine = new;
+		*racine = temp;
 	}
 }
 void main(){
@@ -216,6 +239,6 @@ void main(){
 	printf("nouveau code des caracteres : ");
 	couleur("0");
 	printf("\n");
-	parcours(&(racine->fg),racine->fg);
+	parcours(&racine,racine);
 	printf("\n");
 }
