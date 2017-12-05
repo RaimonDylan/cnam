@@ -111,10 +111,10 @@ void afficheListe(struct maillon *liste){
 		printf("   - ");
 		couleur("0");
 		printf(" nombre de %c", liste->caractere);
-		printf(" : ");
 		couleur("32");
-		printf("%d\n", liste->nb);
+		printf(" : ");
 		couleur("0");
+		printf("%d\n", liste->nb);
 		liste = liste->suivant;
 	}
 }
@@ -130,7 +130,10 @@ void afficherHisto(int *histo){
 			printf("   - ");
 			couleur("0");
 			printf("%c", i );
-			printf(" = %d\n",histo[i]);
+			couleur("32");
+			printf(" = ");
+			couleur("0");
+			printf("%d\n",histo[i]);
 
 		}
 	}
