@@ -239,7 +239,7 @@ void main(){
 		insereMaillon(val,0,&liste);
 	}
 	couleur("32");
-	printf("nouveau code des caracteres : ");
+	printf("Code des caracteres : ");
 	couleur("0");
 	printf("\n");
 	parcours(&racine,racine);
