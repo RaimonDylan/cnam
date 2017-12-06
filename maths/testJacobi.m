@@ -6,3 +6,8 @@ x
 disp("x matlab : "),(A\b)
 disp("residu   : "),(r)
 disp("k FINAL  : "),(k)
+[x,k,r]=myGS(A,b,1.e-9,50);
+disp("x GS : ")
+x
+disp("residu   : "),(r)
+disp("k FINAL  : "),(k)
