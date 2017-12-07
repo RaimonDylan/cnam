@@ -71,6 +71,17 @@ interface PersonneInterface extends Remote{
 ```java
 PersonneInterface p=new Personne ("Lucky", "Luke", 30);
 ```
+  - On doit donc modifier la methode vieillir Personne de la classe Traitements
+  
+```java
+public void vieillirPersonne(PersonneInterface p) throws RemoteException {
+        p.vieillir();
+    }
+```
+  - Donc modifier la signature de cette methode dans son interface
+```java
+  public void vieillirPersonne(PersonneInterface p) throws RemoteException;
+```
 
 
 Qu'est ce qui est maintenant affiché par le client ?
