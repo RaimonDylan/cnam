@@ -44,7 +44,6 @@ class ServeurTchat extends UnicastRemoteObject implements ServeurTchatInterface{
 
     /* En-tête de la méthode transfertMessage(...) */
     public void transfertMessage(String msg) throws RemoteException{
-            System.out.println(msg);
             for (int i=0; i<clients.size(); i++){
             	ClientTchatInterface client= (ClientTchatInterface)(clients.get(i));
             	client.recuperationNouveauMessage(msg);
