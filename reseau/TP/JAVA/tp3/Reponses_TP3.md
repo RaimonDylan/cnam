@@ -23,7 +23,7 @@ Le client affiche :
 ```bash
 Luke Lucky a 30ans
 ```
-#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.
+#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.Qu'est ce qui est maintenant affiché par le client ?
 
  - On doit modifier la classe Personne et créer son interface
  
@@ -82,9 +82,7 @@ public void vieillirPersonne(PersonneInterface p) throws RemoteException {
 ```java
   public void vieillirPersonne(PersonneInterface p) throws RemoteException;
 ```
-
-
-Qu'est ce qui est maintenant affiché par le client ?
+  - Le client affiche :
 
 ```bash
 Luke Lucky a 31ans
