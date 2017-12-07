@@ -2,7 +2,7 @@
 
 ## II. Java RMI. Passage d'un paramètre objet à une méthode distante par valeur et par adresse
 
-**a) De quel côté (client ou serveur) doit-on placer ces différentes interfaces et classes (une fois compilées). A quoi correspond chacune ? Que manque t-il et comment l'obtient-t-on ? Qu'est ce qui est affiché par le client ?**
+#### a) De quel côté (client ou serveur) doit-on placer ces différentes interfaces et classes (une fois compilées). A quoi correspond chacune ? Que manque t-il et comment l'obtient-t-on ? Qu'est ce qui est affiché par le client ?
 
   - Client : 
     - TraitementsInterface.java
@@ -23,7 +23,7 @@ Le client affiche :
 ```bash
 Luke Lucky a 30ans
 ```
-**b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur. **
+#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.
 
  - On doit modifier la classe Personne et créer son interface
  
