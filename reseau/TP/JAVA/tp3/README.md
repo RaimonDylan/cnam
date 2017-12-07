@@ -89,3 +89,15 @@ Qu'est ce qui est maintenant affiché par le client ?
 ```bash
 Luke Lucky a 31ans
 ```
+
+## III. Java RMI. Mécanisme du Callback.
+
+#### De quel côté doit-on placer les différentes classes et interfaces ?
+  - Client : 
+    - ServeurTchatInterface.java
+    - ClientTchatInterface.java
+    - ClientTchat.java
+  - Serveur :
+    - ServeurTchatInterface.java
+    - ClientTchatInterface.java
+    - ServeurTchat.java
