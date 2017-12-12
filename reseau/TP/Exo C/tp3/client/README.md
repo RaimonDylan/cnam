@@ -1,101 +1,57 @@
-# TP3
+# Client 
+```c
+#include <rpc/rpc.h>
+#include <stdio.h>
+#include <stdlib>
+#include <string.h>
+#include <strings.h>
 
-## II. Java RMI. Passage d'un paramètre objet à une méthode distante par valeur et par adresse
+#define ARITHM_PROG_NUM ((u_long)0x33333333)
+#define ARITHM_VERS_NUM ((u_long)1)
+#define ADD_FCT_NUM ((u_long)1)
 
-#### a) De quel côté (client ou serveur) doit-on placer ces différentes interfaces et classes (une fois compilées). A quoi correspond chacune ? Que manque t-il et comment l'obtient-t-on ? Qu'est ce qui est affiché par le client ?
+/* Deux entiers pour le calcul */
+struct operands{
+    int op1;
+    int op2;
+};
 
-  - Client : 
-    - TraitementsInterface.java
-    - PetitClient.java
-    - Personne.java
-  - Serveur : 
-    - TraitementsInterface.java
-    - Traitements.java
-    - PetitServeur.java
-    - Personne.java
-    
-Il manque ce traitement :
-traitementsInterface.vieillirPersonne(p).
-Le serveur exécute bien ce traitement mais modifie la copie de la personne donné en paramètre.
-On doit donc passer la personne par référence.
+/* Fonction d'/de… */
+bool_t encoding_operands(XDR *x, struct operands *ops){
+    /* Même chose que pour serveur.c */ 
+    ….....
+}
 
-Le client affiche :
-```bash
-Luke Lucky a 30ans
-```
-#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.Qu'est ce qui est maintenant affiché par le client ?
+/* Fonction principale. argv[1] : hôte distant. argv[2] : première opérande. argv[3] : deuxième opérande. */
 
- - On doit modifier la classe Personne et créer son interface
- 
-```java
-import java.io.*;
-import java.rmi.*;
-import java.rmi.server.*;
-class Personne extends UnicastRemoteObject implements PersonneInterface{
-    private String nom;
-    private String prenom;
-    private int age;
-    
-    public Personne(String nom, String prenom, int age) throws RemoteException{
-        this.nom=nom;
-        this.prenom=prenom;
-        this.age=age;
+main(int argc, char *argv[]){
+
+    if (argc<4){
+        fprintf(stderr, "missing parameters\n")
+        exit(1)
     }
 
-    public void vieillir() throws RemoteException{
-        
-        age++;
+    char *host=argv[1];
+
+    struct operands ops;
+    /* Récupération des deux entiers */
+    ….....
+    ….....
+
+   /* Entier qui contiendra leur somme*/
+    int result;
+
+    /* Appel de la fonction distante */
+    ….....
+
+    if (r!=0){
+        clnt_perrno(r);
+        exit(1);
     }
 
-    public void afficherAge() throws RemoteException{
-        System.out.println(prenom+" "+nom+" a "+age+ "ans");
-    }
+    printf("La somme de %d et %d est : %d\n", ops.op1, ops.op2, result);
+    exit(0);
+
 }
 
 ```
-
- - PersonneInterface.java
-
-```java
-import java.rmi.*;
-
-interface PersonneInterface extends Remote{
-    public void vieillir() throws RemoteException;
-    public void afficherAge() throws RemoteException;
-}
-
-```
-
- - Dans le client lui passer un objet de Type : PersonneInterface
-
-```java
-PersonneInterface p=new Personne ("Lucky", "Luke", 30);
-```
-  - On doit donc modifier la methode vieillir Personne de la classe Traitements
-  
-```java
-public void vieillirPersonne(PersonneInterface p) throws RemoteException {
-        p.vieillir();
-    }
-```
-  - Donc modifier la signature de cette methode dans son interface
-```java
-  public void vieillirPersonne(PersonneInterface p) throws RemoteException;
-```
-  - Le client affiche :
-
-```bash
-Luke Lucky a 31ans
-```
-
-## III. Java RMI. Mécanisme du Callback.
-
-#### De quel côté doit-on placer les différentes classes et interfaces ?
-  - Client : 
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ClientTchat.java
-  - Serveur :
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ServeurTchat.java
