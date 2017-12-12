@@ -1,4 +1,4 @@
-# fFnction inverse 
+# Fonction inverse 
 ```Matlab
 function invA=myinv(A)
   [n,m] = size(A);
