@@ -1,101 +1,110 @@
-# TP3
-
-## II. Java RMI. Passage d'un paramètre objet à une méthode distante par valeur et par adresse
-
-#### a) De quel côté (client ou serveur) doit-on placer ces différentes interfaces et classes (une fois compilées). A quoi correspond chacune ? Que manque t-il et comment l'obtient-t-on ? Qu'est ce qui est affiché par le client ?
-
-  - Client : 
-    - TraitementsInterface.java
-    - PetitClient.java
-    - Personne.java
-  - Serveur : 
-    - TraitementsInterface.java
-    - Traitements.java
-    - PetitServeur.java
-    - Personne.java
-    
-Il manque ce traitement :
-traitementsInterface.vieillirPersonne(p).
-Le serveur exécute bien ce traitement mais modifie la copie de la personne donné en paramètre.
-On doit donc passer la personne par référence.
-
-Le client affiche :
-```bash
-Luke Lucky a 30ans
-```
-#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.Qu'est ce qui est maintenant affiché par le client ?
-
- - On doit modifier la classe Personne et créer son interface
- 
+# Exercice 1 
 ```java
-import java.io.*;
-import java.rmi.*;
-import java.rmi.server.*;
-class Personne extends UnicastRemoteObject implements PersonneInterface{
-    private String nom;
-    private String prenom;
-    private int age;
-    
-    public Personne(String nom, String prenom, int age) throws RemoteException{
-        this.nom=nom;
-        this.prenom=prenom;
-        this.age=age;
-    }
+interface PersonneInterface{
+      public void vieillir();
+      public void clonerPersonne(Personne p);
+}
 
-    public void vieillir() throws RemoteException{
-        
-        age++;
-    }
+class Personne implements PersonneInterface{
+      private String nom ;
+      private String prenom ;
+      private int age ;
 
-    public void afficherAge() throws RemoteException{
-        System.out.println(prenom+" "+nom+" a "+age+ "ans");
-    }
+      public Personne (String nom, String prenom, int age){
+            this.nom = nom;
+            this.prenom = prenom;
+            this.age = age;
+      }
+
+      public void vieillir(){
+            age++;
+      }
+
+      public String retournerNom(){
+            return this.nom;
+      }
+
+      public String retournerPrenom(){
+            return this.prenom;
+      }
+
+      public int retournerAge(){
+            return this.age;
+      }
+
+      public void majNom(String nom){
+            this.nom=nom;
+      }
+
+      public void majPrenom(String prenom){
+            this.prenom=prenom;
+      }
+
+      public void majAge(int age){
+            this.age=age;
+      }
+
+      public void clonerPersonne(Personne p){
+            p.nom = this.nom;
+            p.prenom = this.prenom;
+            p.age = this.age;
+      }
+
+      public void afficheInformations(){
+            System.out.println("Je suis la personne "+nom+" "+prenom+" et d'age "+age+ " ans");
+      }
+
+}
+
+class Etudiant extends Personne {
+
+      int numEtudiant;
+      String nomUniversite;
+
+      public Etudiant (String nom, String prenom, int age, int numEtudiant, String nomUniversite){
+            super(nom,prenom,age);
+            this.numEtudiant = numEtudiant;
+            this.nomUniversite = nomUniversite;
+      }
+
+      public void afficheInformations(){
+            System.out.println("Je suis l'etudiant "+retournerNom()+" "+retournerPrenom()+ " d'age "+retournerAge()+" ans identifie par "+numEtudiant+" et etudiant a "+nomUniversite);
+      }
+}
+
+class MonProgramme {
+
+      public static void main(String args[]){
+            try{
+                  Personne p = new Personne("Martin", "Pierre", 30);
+                  Etudiant e = new Etudiant("Dupond", "Jacques", 20, 12345, "La Garde");
+                  p.afficheInformations();
+                  e.afficheInformations();
+
+                  
+                  Personne p1 = new Personne("Durand", "Jean", 60);
+                  Personne p2 = new Personne("Fournier", "Paul", 50);
+                  p1=p2;
+                  p2.vieillir();
+                  p2.vieillir();
+                  p1.vieillir();
+                  p1.afficheInformations();
+                  p2.afficheInformations();
+                  
+
+                  
+                  Personne p3=new Personne("Roche", "Nicolas", 35);
+                  p.clonerPersonne(p3);
+                  p3.vieillir();
+                  p.afficheInformations();
+                  p3.afficheInformations();
+                  
+
+            }
+            catch (Exception e){
+                  e.printStackTrace() ;
+            }
+      }
 }
 
 ```
-
- - PersonneInterface.java
-
-```java
-import java.rmi.*;
-
-interface PersonneInterface extends Remote{
-    public void vieillir() throws RemoteException;
-    public void afficherAge() throws RemoteException;
-}
-
-```
-
- - Dans le client lui passer un objet de Type : PersonneInterface
-
-```java
-PersonneInterface p=new Personne ("Lucky", "Luke", 30);
-```
-  - On doit donc modifier la methode vieillir Personne de la classe Traitements
-  
-```java
-public void vieillirPersonne(PersonneInterface p) throws RemoteException {
-        p.vieillir();
-    }
-```
-  - Donc modifier la signature de cette methode dans son interface
-```java
-  public void vieillirPersonne(PersonneInterface p) throws RemoteException;
-```
-  - Le client affiche :
-
-```bash
-Luke Lucky a 31ans
-```
-
-## III. Java RMI. Mécanisme du Callback.
-
-#### De quel côté doit-on placer les différentes classes et interfaces ?
-  - Client : 
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ClientTchat.java
-  - Serveur :
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ServeurTchat.java
