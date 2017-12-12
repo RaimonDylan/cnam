@@ -1,1 +1,3 @@
-# COURS ET TP RESEAU
+# RESEAU
+- [Les Cours](./COURS)
+- [Les TP](./TP)
