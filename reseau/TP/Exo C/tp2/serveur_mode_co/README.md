@@ -1,101 +1,131 @@
-# TP3
+# Serveur mode connecté
+```c
 
-## II. Java RMI. Passage d'un paramètre objet à une méthode distante par valeur et par adresse
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
-#### a) De quel côté (client ou serveur) doit-on placer ces différentes interfaces et classes (une fois compilées). A quoi correspond chacune ? Que manque t-il et comment l'obtient-t-on ? Qu'est ce qui est affiché par le client ?
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
 
-  - Client : 
-    - TraitementsInterface.java
-    - PetitClient.java
-    - Personne.java
-  - Serveur : 
-    - TraitementsInterface.java
-    - Traitements.java
-    - PetitServeur.java
-    - Personne.java
-    
-Il manque ce traitement :
-traitementsInterface.vieillirPersonne(p).
-Le serveur exécute bien ce traitement mais modifie la copie de la personne donné en paramètre.
-On doit donc passer la personne par référence.
+int balanceTonPorc(struct sockaddr_in addr){
+	return addr.sin_port;
+}
 
-Le client affiche :
-```bash
-Luke Lucky a 30ans
-```
-#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.Qu'est ce qui est maintenant affiché par le client ?
+int main(int argc, char *argv[]){ 
 
- - On doit modifier la classe Personne et créer son interface
- 
-```java
-import java.io.*;
-import java.rmi.*;
-import java.rmi.server.*;
-class Personne extends UnicastRemoteObject implements PersonneInterface{
-    private String nom;
-    private String prenom;
-    private int age;
-    
-    public Personne(String nom, String prenom, int age) throws RemoteException{
-        this.nom=nom;
-        this.prenom=prenom;
-        this.age=age;
-    }
+    /* 1. Récupération des paramètres d'entrée */
 
-    public void vieillir() throws RemoteException{
+        short portLoc = (short) atoi(argv[1]) ;		/* numéro de port local */
+        char *nomServ;
+        nomServ = argv[2];		/* Pointeur sur le nom du serveur */
+        short portServ  = (short) atoi(argv[3]) ;		/* numéro de port serveur */
+        char *msgEnvoi;
+        msgEnvoi = argv[4] ; 		/* Pointeur sur le message à envoyer */
+        int  tailleMsgEnvoi= atoi(argv[5]) ;		/* taille du message */
+	
+        /* 2. Déclaration des variables permettant la communication sur le réseau */
+
+        int sockLoc;	// descripteur de la socket locale (cliente)
+        struct hostent* infosServ;   	/* Informations du serveur */
+        struct sockaddr_in infosAddrLoc;  	/* Informations d'adressage de la socket locale */
+        struct sockaddr_in infosAddrServ;    	/* Informations d'adressage de la socket serveur */
+        int tailleInfosAddrLoc, tailleInfosAddrServ ;	/* taille des informations d'adressage de la socket locale */
+
+        char msgRecu [1000] ;	 /* Buffer qui contiendra la réponse du serveur */
+
+        /* 3. Création de la socket en mode connecté, si création réussie retourne son descripteur dans sockLoc, sinon on    
+        quitte le programme */
+        int sock = socket(AF_INET, SOCK_STREAM, 0);
+
+        // if(sock == INVALID_SOCKET){
+        if(sock == -1){
+            perror("Socket()");
+            exit(errno);
+        } else {
+            // COMMENT ON FAIT ? //TODO
+            sockLoc = sock;
+            printf("Socket = %d\n", sock);
+            printf("%d\n", sockLoc);
+        }
+
+        int errno;
         
-        age++;
-    }
 
-    public void afficherAge() throws RemoteException{
-        System.out.println(prenom+" "+nom+" a "+age+ "ans");
-    }
-}
+		
 
-```
+        /* 4. Mise à jour des informations d'adressage locales */
 
- - PersonneInterface.java
+        /* 4.1. Mise à jour du domaine de la socket locale */
 
-```java
-import java.rmi.*;
+        infosAddrLoc.sin_family=AF_INET;
 
-interface PersonneInterface extends Remote{
-    public void vieillir() throws RemoteException;
-    public void afficherAge() throws RemoteException;
-}
+        /* 4.2. Mise à jour du numéro de port local après avoir fait la conversion en format réseau */
 
-```
+        infosAddrLoc.sin_port=htons(1234);
 
- - Dans le client lui passer un objet de Type : PersonneInterface
+        infosAddrLoc.sin_addr.s_addr = htonl(INADDR_ANY);  /* 4.3. Que fait-on ici  ? */  
+        /* …..... */
 
-```java
-PersonneInterface p=new Personne ("Lucky", "Luke", 30);
-```
-  - On doit donc modifier la methode vieillir Personne de la classe Traitements
+        /* 4.4. Mise à jour de tailleInfosAddrLoc */
+         tailleInfosAddrLoc = sizeof(infosAddrLoc);
+
+        /* 5. Attachement de la socket locale, si erreur on quitte le programme */ 
+        if(bind(sock,(struct sockaddr *) &infosAddrLoc, tailleInfosAddrLoc) == -1){
+            printf("BIND RETURN -1\n");
+            printf("MESSAGE : %s\n",strerror(errno));
+
+        }else printf("TUTTI VA BENE\n");
+        /* 6. Récupère les informations du serveur à partir de son nom */
+         infosServ = gethostbyname(nomServ);    
+
+        /* 7. Mise à jour des informations d'adressage du serveur */
+         infosAddrServ.sin_family = AF_INET;	/* Mise à jour du domaine de la socket serveur */
+         infosAddrServ.sin_port = htons(portServ);            /* Mise à jour du numéro de port serveur */
+         memcpy(&infosAddrServ.sin_addr, infosServ->h_addr, infosServ->h_length);	/*Mise à jour de l'adresse IP du serveur*/
   
-```java
-public void vieillirPersonne(PersonneInterface p) throws RemoteException {
-        p.vieillir();
-    }
-```
-  - Donc modifier la signature de cette methode dans son interface
-```java
-  public void vieillirPersonne(PersonneInterface p) throws RemoteException;
-```
-  - Le client affiche :
+         printf("Adresse du serveur: %s \n", inet_ntoa(infosAddrServ.sin_addr));
+  
+         tailleInfosAddrServ = sizeof(infosAddrServ);	/* Mise à jour de tailleInfosAddrServ */
+  
+        /* 8. Connexion au serveur, si problème de connexion on quitte le programme */
+        /*if(connect(sock, (struct sockaddr *) &infosAddrServ, tailleInfosAddrServ) == -1){
+            printf("CONNECT RETURN -1\n");
+            printf("MESSAGE : %s\n",strerror(errno));
+        }else printf("TUTTI VA BENE +\n");
+        */
 
-```bash
-Luke Lucky a 31ans
+         // MODE SERVEUR 
+
+        if(listen (sock, 50) == -1){
+            printf("Listen RETURN -1\n");
+            printf("MESSAGE : %s\n",strerror(errno));
+        }else printf("TUTTI VA BENE +\n");
+        int new_fd;
+        if((new_fd = accept(sock,(struct sockaddr *) &infosAddrServ, &tailleInfosAddrLoc)) == -1){
+            printf("accept RETURN -1\n");
+            printf("MESSAGE : %s\n",strerror(errno));
+        }else printf("TUTTI VA BENE +\n");
+
+        /* 10. Récupère la réponse du serveur et l'affiche */
+
+        if(recv(new_fd,msgRecu, sizeof(msgRecu), 0) == -1){
+            printf("recv RETURN -1\n");
+            printf("MESSAGE : %s\n",strerror(errno));
+        }else{
+            // MESSAGE RECU EN MAJUSCULE
+            char mot[1000];
+            for (int i=0; i<strlen(msgRecu); i++) {
+                 mot[i]=toupper(msgRecu[i]);
+            }
+            printf("%s\n",mot);
+        } 
+
+        /* 11. Fermeture de la socket */
+        close(sockLoc) ;
+}
 ```
-
-## III. Java RMI. Mécanisme du Callback.
-
-#### De quel côté doit-on placer les différentes classes et interfaces ?
-  - Client : 
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ClientTchat.java
-  - Serveur :
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ServeurTchat.java
