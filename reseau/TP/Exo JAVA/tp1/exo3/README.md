@@ -1,101 +1,117 @@
-# TP3
-
-## II. Java RMI. Passage d'un paramètre objet à une méthode distante par valeur et par adresse
-
-#### a) De quel côté (client ou serveur) doit-on placer ces différentes interfaces et classes (une fois compilées). A quoi correspond chacune ? Que manque t-il et comment l'obtient-t-on ? Qu'est ce qui est affiché par le client ?
-
-  - Client : 
-    - TraitementsInterface.java
-    - PetitClient.java
-    - Personne.java
-  - Serveur : 
-    - TraitementsInterface.java
-    - Traitements.java
-    - PetitServeur.java
-    - Personne.java
-    
-Il manque ce traitement :
-traitementsInterface.vieillirPersonne(p).
-Le serveur exécute bien ce traitement mais modifie la copie de la personne donné en paramètre.
-On doit donc passer la personne par référence.
-
-Le client affiche :
-```bash
-Luke Lucky a 30ans
-```
-#### b) Que doit-on modifier dans le code des classes et interfaces précédentes pour que le paramètre objet soit maintenant passé par adresse. Comment doit-on maintenant répartir les différentes classes et interfaces entre le client et le serveur.Qu'est ce qui est maintenant affiché par le client ?
-
- - On doit modifier la classe Personne et créer son interface
- 
+# Exercice 3
 ```java
-import java.io.*;
-import java.rmi.*;
-import java.rmi.server.*;
-class Personne extends UnicastRemoteObject implements PersonneInterface{
-    private String nom;
-    private String prenom;
-    private int age;
-    
-    public Personne(String nom, String prenom, int age) throws RemoteException{
-        this.nom=nom;
-        this.prenom=prenom;
-        this.age=age;
-    }
+import java.lang.Math;
+import java.util.*;
 
-    public void vieillir() throws RemoteException{
-        
-        age++;
-    }
+class MonThreadLecture extends Thread {
+      private MonThreadEcriture threadEcriture;
+      private MonTableau monTableau ;
+      private String nom;
 
-    public void afficherAge() throws RemoteException{
-        System.out.println(prenom+" "+nom+" a "+age+ "ans");
-    }
+      public MonThreadLecture (MonTableau monTableau){
+            this.monTableau=monTableau;
+            this.nom = "lecture";
+      }
+
+      public synchronized void run() {
+            try {
+                  if(threadEcriture!=null){
+                      threadEcriture.join();   
+                  }
+                  monTableau.lectureTab();
+
+            }
+            catch (Exception e){
+                  e.printStackTrace() ;
+            }
+            
+      }
+
+      public void setThread(MonThreadEcriture threadEcriture){
+            this.threadEcriture=threadEcriture;
+      }
+}
+
+class MonThreadEcriture extends Thread {
+      private MonTableau monTableau ;
+      private String nom;
+
+      public MonThreadEcriture (MonTableau monTableau){
+            this.monTableau=monTableau;
+            this.nom = "ecriture";
+      }
+
+      public void run() {
+
+            monTableau.ecritureTab();   
+      }
+}
+
+class MonTableau{
+      int max=10;
+      int tableau []=new int[max];
+
+      public MonTableau(int max){
+            this.max=max;
+            this.tableau =new int[max];
+      }
+
+      public void lectureTab(){
+            try{
+                  for (int i=0;i<max; i++){
+                        System.out.println("lecture a l'indice "+i+" => "+tableau[i]);
+                  }
+            }
+            catch (Exception e){
+                  e.printStackTrace() ;
+            }
+      }
+      public void ecritureTab(){
+            try{
+                  for (int i=0;i<max; i++){
+                        int nb= (int)(Math.round((Math.random())*10) ) ;
+                        tableau[i]=nb;
+                        System.out.println("ecriture a l'indice "+i+" => "+tableau[i]);
+                  }
+            }
+            catch (Exception e){
+                  e.printStackTrace() ;
+            }
+      }
+
+}
+
+class MesThreads {
+
+      public static void main(String args[]){
+            try{
+
+                  int max=10;
+                  while (true){
+                        Scanner keyboard = new Scanner(System.in);
+                        System.out.print ("Entrez un max  : ");
+                        String s=keyboard.nextLine();
+                        try{
+                              max = Integer.parseInt(s);
+                              break;
+                        }
+                        catch (Exception e){
+                              System.out.println ("Valeur entiere SVP ");
+                              continue;
+                        }
+                  }
+                  MonTableau monTableau=new MonTableau(max);
+
+                  MonThreadLecture monThreadLecture=new MonThreadLecture(monTableau);
+                  MonThreadEcriture monThreadEcriture=new MonThreadEcriture(monTableau);
+                  monThreadLecture.setThread(monThreadEcriture);
+                  monThreadLecture.start();
+                  monThreadEcriture.start();
+            }
+            catch (Exception e){
+                  e.printStackTrace() ;
+            }
+      }
 }
 
 ```
-
- - PersonneInterface.java
-
-```java
-import java.rmi.*;
-
-interface PersonneInterface extends Remote{
-    public void vieillir() throws RemoteException;
-    public void afficherAge() throws RemoteException;
-}
-
-```
-
- - Dans le client lui passer un objet de Type : PersonneInterface
-
-```java
-PersonneInterface p=new Personne ("Lucky", "Luke", 30);
-```
-  - On doit donc modifier la methode vieillir Personne de la classe Traitements
-  
-```java
-public void vieillirPersonne(PersonneInterface p) throws RemoteException {
-        p.vieillir();
-    }
-```
-  - Donc modifier la signature de cette methode dans son interface
-```java
-  public void vieillirPersonne(PersonneInterface p) throws RemoteException;
-```
-  - Le client affiche :
-
-```bash
-Luke Lucky a 31ans
-```
-
-## III. Java RMI. Mécanisme du Callback.
-
-#### De quel côté doit-on placer les différentes classes et interfaces ?
-  - Client : 
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ClientTchat.java
-  - Serveur :
-    - ServeurTchatInterface.java
-    - ClientTchatInterface.java
-    - ServeurTchat.java
