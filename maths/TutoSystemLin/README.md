@@ -244,7 +244,7 @@ On va donc utiliser cette fonction
   
   
   
-# Solution Cramer
+**Solution Cramer**
 
 ```Matlab
 function x = cramer(A,b)
@@ -264,8 +264,8 @@ x = x';
 ```
   
   
-# Bon courage ;) 
-### Réalisé par RAIMON Dylan
+**Bon courage ;)** 
+**Réalisé par RAIMON Dylan**
  
   
   
