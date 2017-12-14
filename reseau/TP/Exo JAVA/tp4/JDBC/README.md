@@ -1,3 +1,6 @@
+# JDBC
+```java
+
 import java.sql.*;
 
 public class jdbc{
@@ -179,5 +182,6 @@ public class jdbc{
         }
     }
 }
+```
 
 
