@@ -1,8 +1,11 @@
 #include <rpc/rpc.h>
+#include <rpc/xdr.h>
+#include <rpc/types.h>
 #include <stdio.h>
-#include <stdlib>
+#include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <rpc/pmap_clnt.h>
 
 #define ARITHM_PROG_NUM ((u_long)0x33333333)
 #define ARITHM_VERS_NUM ((u_long)1)
@@ -16,24 +19,26 @@ struct operands{
 
 /* Fonction d'/de … */
 bool_t encoding_operands(XDR *x, struct operands *ops){
-    /* Compléter ici */
-    ….....
+    if(ops != NULL){
+        xdr_int(x, &(ops->op1));
+        xdr_int(x, &(ops->op2));
+    } else return -1;
 }
 
 /* Fonction appelable à distance qui calcule la somme de 2 entiers */
 int *add (struct operands *ops){
-    static int result;
-    /* Compléter ici */
-    ….....
-    ….....
+    int result = ops->op1 + ops->op2;
+    return result;
 }
 
-main(int argc, char *argv[]){
+/*  */
+void main(int argc, char *argv[]){
 
-   pmap_unset(ARITHM_PROG_NUM, ARITHM_VERS_NUM);
+    pmap_unset(ARITHM_PROG_NUM, ARITHM_VERS_NUM);
 
     /* Enregistrement de la fonction auprès du portmap */
-    ….....
+   // Pointeur de fonction juste avec le nom de fonction
+    int r = registerrpc(ARITHM_PROG_NUM, ARITHM_VERS_NUM, ADD_FCT_NUM, add, encoding_operands,xdr_int);
 
     if (r==-1){
         perror("Registering service\n");
