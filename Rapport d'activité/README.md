@@ -10,6 +10,7 @@ le client donne la liste des fonctionnalités, on les organisent dans le sprint 
 Commence par le sprint 0 pour réaliser toute la mise en place
 Fonctionnalités listées et décrites sous forme de stories et plcées dans le backlog produit.
 Au début d'un sprint on fait un réunion pour déterminer les stories qui vont être dév et ont les priorise.
-Durant le sprint des réunions quotidiennes sont organisées (15 minutes) pour que tout le monde ait le même niveau d'information
+Durant le sprint des réunions quotidiennes sont organisées (15 minutes) 
+afin que tout le monde ait le même niveau d'information
 ```
 ___
