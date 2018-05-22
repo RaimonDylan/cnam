@@ -1,11 +1,3 @@
 # Exercices Algo
-- [Arbre](./arbre)
-- [Automate](./automate)
-- [Cherche](./cherche)
-- [Graphe](./graphe)
-- [2ème Graphe](./graphe_2)
-- [Huffman](./huffman)
-- [Liste chainée](./listechaine)
-- [Liste chainée ordonnée](./listechaineordo)
-- [Liste double chainée](./listedoublechaine)
-- [Programmation Système](./ProgSysteme)
+- [Test fonction fork](./forktest)
+- [Processus qui crée beaucoup de processus](./muchProcessus)
