@@ -24,7 +24,6 @@ int main(){
       printf("Pere, PID : %d, PPID : %d ,global : %d\n", getpid(), getppid(),global);
       sleep(1);
     }
-
   }
   exit(0);
 }
