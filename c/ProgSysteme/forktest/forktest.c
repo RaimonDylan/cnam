@@ -1,17 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd>
+#include <unistd.h>
+#include <sys/wait.h>
 
 int main(){
-  
-  int ret = fork();
+
+  int ret = fork(),status;
   int a = 17;
   int id = getpid();
   if(ret!=0)
   {
-    printf("#JeSuisPapa%d\n", a);
+    while(1){
+      printf("#JeSuisPapa%d\n", a);
+      a=0;
+      wait(&status);
+      sleep(1);
+    }
 
   }
-  else printf("#JeSuisEnfant%d\n", a);
+  else {
+    while (1) {
+      printf("#JeSuisEnfant%d\n", a);
+      sleep(1);
+    }
+
+  }
   printf("identifiant : %d\n",id );
 }

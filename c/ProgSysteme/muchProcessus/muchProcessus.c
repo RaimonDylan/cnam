@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int main(){
+int main(void){
   int a = 0, nbP = 10, status;
   for (size_t i = 0; i < nbP; i++) {
     if(a == 0){
@@ -12,4 +12,5 @@ int main(){
       else printf("robot n°%d - père : %d\n", getpid(), getppid());
     }
   }
+  return 0;
 }
