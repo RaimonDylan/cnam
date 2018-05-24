@@ -20,5 +20,15 @@ int main(){
       pidfils = wait(&retour);
       printf("Mort du processus PID %d\n", pidfils );
   }
+  if(WIFEXITED(retour)){
+    printf("code de retour :%d\n",WEXITSTATUS(retour));
+    exit(0);
+  }
+  if(WIFSIGNALED(retour)){
+    printf("tué par le signal %d\n",WTERMSIG(retour));
+    if(WCOREDUMP(retour))
+      printf("fichier core crée\n");
+    exit(1);
+  }
   exit(0);
 }
