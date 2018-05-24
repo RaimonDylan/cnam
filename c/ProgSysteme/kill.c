@@ -3,9 +3,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <signal.h>
+struct sigaction action;
 
 int main(){
-
+  action.sa_handler=SIG_IGN;
+  action.sa_flags=0;
+  sigemptyset(&action.sa_mask);
+  sigaction(SIGCHLD,&action,NULL);
   pid_t pid,pidfils;
   int status;
     switch(pid = fork()){
@@ -24,7 +29,7 @@ int main(){
         printf("envoi de SIGUSR1 au fils %d\n",pid);
         kill(pid,SIGUSR1);
       }
-        pidfils = wait(&status);
+        //pidfils = wait(&status);
         printf("Mort de %d, status=%d\n", pidfils,status);
     }
 
