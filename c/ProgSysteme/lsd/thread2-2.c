@@ -20,5 +20,6 @@ int main(int argc, char* argv[]){
     //pthread_join(id,NULL);
     // si on attend pas le fils le programme se termine avant même l'execution de la fonction du fils
     printf("Fin du thread principal, après la mort du fils : %d\n", id);
-  return 0;
+  return 0; // tue le processus
+  //pthread_exit(0); tue le thread
 }

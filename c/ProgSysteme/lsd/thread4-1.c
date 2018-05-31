@@ -12,9 +12,11 @@
 #include <sys/time.h>
 #include <errno.h>
 
+#define WAIT_TIME_SECONDS   3
 pthread_mutex_t mut;
 pthread_cond_t cond;
-struct timespec tim;
+struct timespec   ts;
+struct timeval    tp;
 int cpt = 0;
 
 void* th(void* arg){
@@ -26,7 +28,6 @@ void* th(void* arg){
 }
 
 void* th1(void* arg){
-  sleep(5);
   // 4 - 1 - a : la condition est deja rempli pendant le sleep
   for (int i = 0; i < 4; i++) {
     cpt++;
@@ -37,12 +38,16 @@ void* th1(void* arg){
 
 void* th2(void* arg){
   pthread_mutex_lock(&mut);
+  gettimeofday(&tp, NULL);
+  ts.tv_sec  = tp.tv_sec;
+  ts.tv_nsec = tp.tv_usec * 1000;
+  ts.tv_sec += WAIT_TIME_SECONDS;
   //sleep(5);
   // 4 - 1 - b : si on supprime la condition le thread attend de manière infini
-  while(cpt<3){
-    pthread_cond_timedwait(&cond,&mut,&tim);
+  while(pthread_cond_timedwait(&cond, &mut, &ts) != ETIMEDOUT){
   }
-  printf("Je suis le thread %d qu a attendu que cpt soit supérieur à 3, valeur cpt =%d\n",pthread_self(),cpt);
+  //printf("Je suis le thread %d qu a attendu que cpt soit supérieur à 3, valeur cpt =%d\n",pthread_self(),cpt);
+  printf("Je suis le thread %d qu a attendu le time out de la fonction timedwait, valeur cpt =%d\n",pthread_self(),cpt);
   pthread_mutex_unlock(&mut);
   pthread_exit(NULL);
 }

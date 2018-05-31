@@ -1,23 +1,29 @@
 #include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <pthread.h>
 #include <stdio.h>
-#include <string.h>
-#include <signal.h>
-#include <sys/ipc.h>
-#include <sys/types.h>
-#include <sys/sem.h>
+#include <unistd.h>
+#include <pthread.h>
 
-void* th(void* arg){
+pthread_mutex_t mut;
+void *res;
+
+void* th(void *arg){
+  int *valret;
+  valret = (int*)malloc(sizeof(int));
+  printf("pthread_self => %d\n",(int)pthread_self());
   sleep(2);
-  printf("Je suis le thread %d\n",pthread_self(),getpid());
-  pthread_exit(NULL);
+  *valret=(int)pthread_self();
+  pthread_exit((void *)valret);
 }
+
 int main(int argc, char* argv[]){
-    pthread_t id;
-    pthread_create(&id,NULL,th,NULL);
-    pthread_join(id,NULL);
-    printf("Fin du thread principal, après la mort du fils : %d\n", id);
-  return 0;
+  pthread_t idt;
+  int *returnValue;
+  for (int i = 0; i < 3; i++) {
+    pthread_create(&idt, NULL, th, NULL);
+    pthread_join( idt, (void **)&returnValue);
+    printf("Pthread_self printed by dad => %d\n",  *returnValue);
+    free(returnValue);
+  }
+  printf("fin thr principal\n");
+  pthread_exit(NULL); // tue le thread
 }
