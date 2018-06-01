@@ -28,17 +28,19 @@ void attendre(double max);
 int main(int argc, char* argv[])
 {
   int       i;
-  pthread_t threads[5];
+  pthread_t threads[10];
   sem_init(&sem,0,3);
   pthread_mutex_init(&mut,NULL);
 
-  pthread_create(&threads[0], NULL, camion, NULL);
-  pthread_create(&threads[1], NULL, voiture, NULL);
-  pthread_create(&threads[2], NULL, camion, NULL);
-  pthread_create(&threads[3], NULL, voiture, NULL);
-  pthread_create(&threads[4], NULL, camion, NULL);
+  for (int i = 0; i < 10; i++) {
+    int nb=rand()%9;
+    if(nb<5)
+      pthread_create(&threads[i], NULL, voiture, NULL);
+    else
+      pthread_create(&threads[i], NULL, camion, NULL);
+  }
 
-  for (i = 0; i < 5; i++) {
+  for (i = 0; i < 10; i++) {
     pthread_join(threads[i], NULL);
   }
 }

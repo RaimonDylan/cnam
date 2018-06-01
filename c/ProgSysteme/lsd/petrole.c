@@ -16,11 +16,12 @@
 #define couleur(param) printf("\033[%sm",param)
 int entier10;
 pthread_mutex_t mut;
-char* res;
-char* valeur;
+int res[8] = {[0 ... 7]=2};
+int cpt=0;
 
 
 void* convertir(void* arg);
+void affiche();
 
 int main(int argc, char* argv[])
 {
@@ -42,12 +43,12 @@ int main(int argc, char* argv[])
   couleur("32");
   pthread_t threads[8];
   for (int i = 0; i < 8; i++) {
-      pthread_create(&threads[i], NULL, convertir, NULL);
+    pthread_create(&threads[i], NULL, convertir, NULL);
   }
   for (int i = 0; i < 8; i++) {
     pthread_join(threads[i], NULL);
   }
-  printf("%s", res);
+  affiche();
   printf("\n");
   couleur("0");
 }
@@ -58,10 +59,18 @@ void* convertir(void* arg)
   pthread_mutex_lock(&mut);
   int id = pthread_self();
   if(entier10>0){
-    valeur = (char)entier10%2;
-    res = strcat(res,valeur);
+    res[cpt] = entier10%2;
     entier10 = entier10/2;
   }
+  cpt++;
   pthread_mutex_unlock(&mut);
-	pthread_exit(NULL);
+  pthread_exit(NULL);
+}
+
+void affiche(){
+  for(int i=7;i>=0;i--){
+    if(res[i]!=2){
+      printf("%d",res[i]);
+    }
+  }
 }
