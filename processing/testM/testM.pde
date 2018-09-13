@@ -7,7 +7,6 @@ AudioPlayer jingle;
 AudioPlayer jingle2;
 FFT fft;
 PFont f;
-int[][] colo=new int[300][3];
 boolean start = true;
 float pick = 0;
 void setup()
