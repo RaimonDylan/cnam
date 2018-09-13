@@ -11,7 +11,6 @@ class Musique {
   float pick = 0;
 
   Musique(AudioPlayer j, AudioPlayer j2) {
-    minim = new Minim(this);
     jingle = j;
     jingle2 = j2;
     fft = new FFT(jingle.bufferSize(), jingle.sampleRate());
@@ -22,8 +21,8 @@ class Musique {
     f = createFont("Arial", 16, true); 
     textFont(f, 12); 
     fill(255);
-    text("musique premier plan : "+(int)jingle2.position()/1000, 300, 30);
-    text("musique arrière plan : "+(int)jingle.position()/1000, 300, 50);
+    text("musique premier plan : "+(int)jingle2.position()/1000, 500, 30);
+    text("musique arrière plan : "+(int)jingle.position()/1000, 500, 50);
     if (jingle.position() > 3000 && start) {
       start = false;
       jingle2.play(0);
@@ -40,7 +39,7 @@ class Musique {
         pick = jingle.position();
       }
       fill(c, 0, c, 50);
-      ellipse(i, 200, 7, fft.getBand(i) * 5);
+      ellipse(20+(i*10), height/2, 7, fft.getBand(i) * 5);
     }
   }
 }

@@ -5,14 +5,14 @@ void setup()
 {
   size(700, 700);
   frameRate(60);
-  background(255);
+  background(0);
   mesBulles = new ArrayList<Bulle>();
   mesBulles.add(new Bulle(width/2, height/2, 60, 3));
 }
 
 void draw()
 {
-  background(255);
+  background(0);
   if(cpt > pop){
     mesBulles.add(new Bulle(random(50,650), random(50,650), 60, 3));
     cpt=0;

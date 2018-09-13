@@ -17,11 +17,11 @@ class Bulle {
   void update() {  
     if (i == 30 || i == 59) time--;
     if (time > 0) {
-      fill(255,255,255, 250);
-      stroke(255,255,255, 250);
+      fill(180,180,180, 250);
+      stroke(180,180,180, 250);
       ellipse(posX, posY, taille, taille);
       noFill();
-      stroke(255);
+      stroke(180);
       ellipse(posX, posY, tailleCercle-5, tailleCercle-5);
       f = createFont("Arial", 16, true); 
       textFont(f, 25); 
