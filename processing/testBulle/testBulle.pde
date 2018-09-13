@@ -1,41 +1,38 @@
-
-PFont f;
-float t = 120;
-int i = 0;
-int a = 3;
-int t1 = 60;
-int transpa = 255;
-float coef = 255/180;
+ArrayList<Bulle> mesBulles;
+float pop = random(30,100);
+float cpt = 0;
 void setup()
 {
   size(700, 700);
   frameRate(60);
   background(255);
+  mesBulles = new ArrayList<Bulle>();
+  mesBulles.add(new Bulle(width/2, height/2, 60, 3));
 }
 
 void draw()
 {
-  if (i == 30 || i == 59) a--;
-  effacer();
-  if (a > 0) {
-    fill(0, 0, 0,50);
-    stroke(0,0,0,50);
-    ellipse(width/2, height/2, t1, t1);
-    noFill();
-    stroke(0,0,0);
-    ellipse(width/2, height/2, t, t);
-    f = createFont("Arial", 16, true); 
-    textFont(f, 25); 
-    textAlign(CENTER);
-    fill(255, 255, 255);
-    text(a, width/2, height/2+10);
-    i = (i == 59)?0:i+1;
+  background(255);
+  if(cpt > pop){
+    mesBulles.add(new Bulle(random(50,650), random(50,650), 60, 3));
+    cpt=0;
+    pop = random(30,100);
   }
-  t = t - 0.7;
+  for (int i = mesBulles.size()-1; i >= 0; i--) { 
+    Bulle maBulle = mesBulles.get(i);
+    maBulle.update();
+    if (maBulle.finished()) {
+      mesBulles.remove(i);
+    }
+  }
+  cpt++;
 }
 
-void effacer(){
-  fill(255);
-  noStroke();
-  ellipse(width/2, height/2, t1*2, t1*2);
+void mousePressed() {
+  for (int i = mesBulles.size()-1; i >= 0; i--) { 
+    Bulle maBulle = mesBulles.get(i);
+    if (maBulle.isHit(mouseX,mouseY)) {
+      mesBulles.remove(i);
+    }
+  }
 }
