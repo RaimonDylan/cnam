@@ -22,6 +22,7 @@ class Musique {
     jingle.mute();
     jingle.play(0);
     mesBulles = new ArrayList<Bulle>();
+    
   }
   void update() {
     f = createFont("Arial", 16, true); 
@@ -54,7 +55,7 @@ class Musique {
       }
       float c = fft.getBand(i) * 16;
       
-      fill(r, g, b, r);
+      fill(r, g, b, 100);
       ellipse(20+(i*10), height-150, 7, fft.getBand(i) * 5);
     }
     if (moy/10 > 50 && jingle.position() - pick > 500 ) {

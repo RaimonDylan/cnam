@@ -15,6 +15,8 @@ class Bulle {
   } 
 
   void update() {  
+    int m = millis();
+    println((m/500)%2);
     if (i == 30 || i == 59) time--;
     if (time > 0) {
       fill(180,180,180, 250);
