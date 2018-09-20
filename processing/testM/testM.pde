@@ -1,6 +1,5 @@
 import ddf.minim.analysis.*;
 import ddf.minim.*;
-import fisica.*;
 
 
 
@@ -13,7 +12,6 @@ Background bg;
 void setup()
 {
   frameRate(60);
-   Fisica.init(this);
   minim = new Minim(this);
   size(700, 600);
   jingle = minim.loadFile("lake.wav");
@@ -27,5 +25,4 @@ void draw()
   //println(frameRate);
   bg.update();
   maMusique.update();
-  
 }
