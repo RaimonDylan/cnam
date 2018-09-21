@@ -82,8 +82,8 @@ FROM VOYAGE v LEFT JOIN RESERVATION r on v.RefV = r.RefV
 ```
 ### 13) Afficher la liste des caractéristiques des réservations complétée par le nom et le prénom de l’adhérent.
 ```SQL
-SELECT *
-FROM RESERVATION NATURAL JOIN ADHERENT
+SELECT r.*, NomA, PrenomA
+FROM RESERVATION r NATURAL JOIN ADHERENT
 ```
 ### 14) Afficher le nom, le prénom et le numéro de tous les adhérents ainsi que la référence et la date de départ des voyages qu’ils ont réservés s’il y en a.
 ```SQL
