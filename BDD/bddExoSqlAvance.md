@@ -35,25 +35,21 @@ SELECT count(*) as nbVoyage, destinationV, typeV
 FROM VOYAGE
 GROUP BY destinationV, typeV
 ```
-### 4) Retrouver le coût maximum, le coût minimum et le coût moyen des voyages de 2 semaines en
-fonction de la destination (14).
+### 4) Retrouver le coût maximum, le coût minimum et le coût moyen des voyages de 2 semaines en fonction de la destination (14).
 ```SQL
 SELECT MAX(CoutV) as CoutMax, MIN(CoutV) as CoutMin, AVG(CoutV) as CoutMoyen
 FROM VOYAGE
 WHERE DureeV = 2
 GROUP BY destinationV
 ```
-5) Retrouver les destinations des voyages dont la durée maximale de séjour est supérieure ou
-égale à 3 semaines, afficher ces destinations et leur durée maximale (16).
+### 5) Retrouver les destinations des voyages dont la durée maximale de séjour est supérieure ou égale à 3 semaines, afficher ces destinations et leur durée maximale (16).
 ```SQL
 SELECT DestinationV, DureeV
 FROM VOYAGE
 GROUP BY destinationV
 HAVING DureeV >= 3
 ```
-6) Retrouver parmi les destinations de voyages de 3 ou 4 semaines, ceux qui ont un prix
-minimum inférieur ou égal à 15 000 euros ; Afficher la destination, le type, la référence de ces
-voyages ainsi que leur durée et leur prix (31).
+### 6) Retrouver parmi les destinations de voyages de 3 ou 4 semaines, ceux qui ont un prix minimum inférieur ou égal à 15 000 euros ; Afficher la destination, le type, la référence de ces voyages ainsi que leur durée et leur prix (31).
 ```SQL
 SELECT *
 FROM VOYAGE
@@ -61,7 +57,7 @@ WHERE DureeV IN ('3','4')
 GROUP BY DestinationV
 HAVING CoutV <= 15000
 ```
-7) Calculer et afficher le prix moyen des voyages de sport et détente en fonction de la durée (35)
+### 7) Calculer et afficher le prix moyen des voyages de sport et détente en fonction de la durée (35)
 ```SQL
 SELECT AVG(CoutV) as PrixMoyen
 FROM VOYAGE
