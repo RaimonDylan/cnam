@@ -47,7 +47,7 @@ GROUP BY destinationV
 SELECT DestinationV, MAX(DureeV)
 FROM VOYAGE
 GROUP BY destinationV
-HAVING DureeV >= 3
+HAVING MAX(DureeV) >= 3
 ```
 ### 6) Retrouver parmi les destinations de voyages de 3 ou 4 semaines, ceux qui ont un prix minimum inférieur ou égal à 15 000 euros ; Afficher la destination, le type, la référence de ces voyages ainsi que leur durée et leur prix (31).
 ```SQL
