@@ -10,7 +10,7 @@
 
 ### 10) Retrouver le nombre de réservations, la somme et la moyenne des acomptes versés par voyage
 ```SQL
-SELECT count(*) as nbReservation, SUM(Acompte) as somAcompte, avg(Acompte)
+SELECT count(*) as nbReservation, SUM(Acompte) as somAcompte, avg(Acompte), refV
 FROM RESERVATION
 GROUP BY RefV
 ```
@@ -24,7 +24,7 @@ GROUP BY DureeV
 ```
 ### 2) Retrouver le prix moyen des voyages d'une durée d'une semaine en fonction du type du voyage (11).
 ```SQL
-SELECT DureeV, AVG(CoutV) as prixMoyen
+SELECT DureeV, TypeV,  AVG(CoutV) as prixMoyen
 FROM VOYAGE
 WHERE DureeV = 1
 GROUP BY typeV
@@ -63,4 +63,21 @@ SELECT AVG(CoutV) as PrixMoyen
 FROM VOYAGE
 WHERE TypeV = 'SD'
 GROUP BY DureeV
+```
+### 8) Retrouvez les adherents n'ayant fait aucune réservation de voyage de type circuit touristique, affichez toutes les caracteristiques des adherents
+```SQL
+SELECT *
+FROM ADHERENT
+WHERE NumA NOT IN ( SELECT NumA 
+                    FROM RESERVATION r, VOYAGE v
+                    WHERE r.RefV = v.RefV
+                    AND TypeV = 'SD')
+```
+### 9) Retrouvez les voyages dont le prix est inférieur au prix moyen des voyages de type sport et detente
+```SQL
+SELECT *
+FROM VOYAGE
+WHERE CoutV < AVG(  SELECT CoutV 
+                    FROM VOYAGE
+                    AND TypeV = 'SD')
 ```
