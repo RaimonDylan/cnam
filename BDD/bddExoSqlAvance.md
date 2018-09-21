@@ -79,5 +79,5 @@ SELECT *
 FROM VOYAGE
 WHERE CoutV < ( SELECT AVG(CoutV) 
                 FROM VOYAGE
-                AND TypeV = 'SD' )
+                WHERE TypeV = 'SD' )
 ```
