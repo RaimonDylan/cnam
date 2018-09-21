@@ -44,7 +44,7 @@ GROUP BY destinationV
 ```
 ### 5) Retrouver les destinations des voyages dont la durée maximale de séjour est supérieure ou égale à 3 semaines, afficher ces destinations et leur durée maximale (16).
 ```SQL
-SELECT DestinationV, DureeV
+SELECT DestinationV, MAX(DureeV)
 FROM VOYAGE
 GROUP BY destinationV
 HAVING DureeV >= 3
