@@ -71,13 +71,13 @@ FROM ADHERENT
 WHERE NumA NOT IN ( SELECT NumA 
                     FROM RESERVATION r, VOYAGE v
                     WHERE r.RefV = v.RefV
-                    AND TypeV = 'CT')
+                    AND TypeV = 'CT' )
 ```
 ### 9) Retrouvez les voyages dont le prix est inférieur au prix moyen des voyages de type sport et detente
 ```SQL
 SELECT *
 FROM VOYAGE
-WHERE CoutV < AVG(  SELECT CoutV 
-                    FROM VOYAGE
-                    AND TypeV = 'SD')
+WHERE CoutV < ( SELECT AVG(CoutV) 
+                FROM VOYAGE
+                AND TypeV = 'SD' )
 ```
