@@ -55,7 +55,7 @@ SELECT *
 FROM VOYAGE
 WHERE DureeV IN ('3','4')
 GROUP BY DestinationV
-HAVING CoutV <= 15000
+HAVING MIN(CoutV) <= 15000
 ```
 ### 7) Calculer et afficher le prix moyen des voyages de sport et détente en fonction de la durée (35)
 ```SQL
