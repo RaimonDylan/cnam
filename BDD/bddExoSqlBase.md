@@ -64,10 +64,9 @@ WHERE DureeV = 1
 ```
 ### 10) Retrouver le nombre de réservations, la somme et la moyenne des acomptes versés par voyage
 ```SQL
-SELECT count(*) as nbReservation, SUM(Acompte) as somAcompte, moyenne
+SELECT count(*) as nbReservation, SUM(Acompte) as somAcompte, avg(Acompte)
 FROM RESERVATION
 GROUP BY RefV
-having avg(Acompte) as moyenne
 ```
 ### 11) Retrouver les destinations des voyages d’une durée de 2 semaines dont le coût est inférieur à 10 000 euros, afficher le coût ainsi que la destination
 ```SQL
