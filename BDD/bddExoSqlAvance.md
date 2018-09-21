@@ -69,9 +69,8 @@ GROUP BY DureeV
 SELECT *
 FROM ADHERENT
 WHERE NumA NOT IN ( SELECT NumA 
-                    FROM RESERVATION r, VOYAGE v
-                    WHERE r.RefV = v.RefV
-                    AND TypeV = 'CT' )
+                    FROM RESERVATION r NATURAL JOIN VOYAGE v
+                    WHERE TypeV = 'CT' )
 ```
 ### 9) Retrouvez les voyages dont le prix est inférieur au prix moyen des voyages de type sport et detente
 ```SQL
