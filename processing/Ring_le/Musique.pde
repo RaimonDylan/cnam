@@ -21,7 +21,7 @@ class Musique {
   float cpt = 0;
   float[] circles = new float[29];
   float gain = 100;
-int tbase = 512;
+  int tbase = 512;
   float[] myBuffer;
   float DECAY_RATE = 2;
   float spectrumScale = 2;
@@ -29,18 +29,7 @@ int tbase = 512;
   float STROKE_MIN = 1;
   float strokeMultiplier = 1;
   float audioThresh = .5;
-float R=125;
-  float centerR=125;
-  float a=PI/2;
-  float a1=PI;
-  float a2=3*PI/2;
-  float pathR=125;
-  float pathG=125;
-  float G=125;
-  float centerG=125;
-  float pathB=125;
-  float B=125;
-  float centerB=125;
+  Color myColor;
 
   Musique(AudioPlayer j) {
     jingle = j;
@@ -49,37 +38,34 @@ float R=125;
     myBuffer = new float[jingle.bufferSize()];
     fft.logAverages( 22, 3);
     jingle.play(0);
+    myColor =  new Color();
   }
   void update() {
     for (int i = 0; i < jingle.bufferSize(); ++i) {
       myBuffer[i] = jingle.left.get(i);
     }
     // find trigger point as largest +ve slope in first 1/4 of buffer
-  int offset = 0;
-  float maxdx = 0;
-  for(int i = 0; i < myBuffer.length/4; ++i)
-  {
+    int offset = 0;
+    float maxdx = 0;
+    for (int i = 0; i < myBuffer.length/4; ++i)
+    {
       float dx = myBuffer[i+1] - myBuffer[i]; 
       if (dx > maxdx) {
         offset = i;
         maxdx = dx;
       }
-  }
-  // plot out that waveform
-  int mylen = min(tbase, myBuffer.length-offset);
-  for(int i = 0; i < mylen -1; i = i + 1)
-  {
-    float x1 = map(i, 0, tbase, 0, width);
-    float x2 = map(i+1, 0, tbase, 0, width);
-    stroke(pathR,pathG,pathB);
-    line(x1, 100 - myBuffer[i+offset]*gain, x2, 100 - myBuffer[i+1+offset]*gain);
-    pathR=centerR+R*sin(a);
-    a=a+.01;
-    pathG=centerG+G*sin(a1);
-    a1=a1+.01;
-    pathB=centerB+B*sin(a2);
-    a2=a2+.01;
-  }
+    }
+    // plot out that waveform
+    int mylen = min(tbase, myBuffer.length-offset);
+    
+    for (int i = 0; i < mylen -1; i = i + 1)
+    {
+      float[] colors = myColor.update();
+      float x1 = map(i, 0, tbase, 0, width);
+      float x2 = map(i+1, 0, tbase, 0, width);
+      stroke(colors[0], colors[1], colors[2]);
+      line(x1, 100 - myBuffer[i+offset]*gain, x2, 100 - myBuffer[i+1+offset]*gain);
+    }
     float moy = 0;
     f = createFont("Arial", 16, true); 
     textFont(f, 12); 
@@ -126,7 +112,7 @@ float R=125;
       //    strokeWeight((float)(xr-xl)*strokeMultiplier);
 
       // Draw an ellipse for this frequency
-      fill(map(amplitude, 0, 1, 0, 255), 0, map(amplitude, 0, 1, 0, 102),150);
+      fill(map(amplitude, 0, 1, 0, 255), 0, map(amplitude, 0, 1, 0, 102), 150);
       ellipse(height/2+60, width/2-40, circles[i], circles[i]);
     }
     println();
