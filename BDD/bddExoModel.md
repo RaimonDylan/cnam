@@ -32,3 +32,5 @@
 **LOGEMENT** (<ins>codeLogement</ins>, adresseLogement, _codeClasse_)  
 **CATEGORIE** (<ins>codeCategorie</ins>, libelleCategorie, tarifMin, tarifMax)  
 **CHAMBRE** (<ins>codeChambre</ins>, nbreLits, tarif, _codeCategorie_, _codeLogement_)
+
+![](http://image.noelshack.com/fichiers/2018/39/4/1538039218-exo2.jpg)
