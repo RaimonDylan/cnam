@@ -16,11 +16,11 @@ class Bulle {
 
   void update() {  
     int m = millis();
-   // println((m/500)%2);
+    // println((m/500)%2);
     if (i == 30 || i == 59) time--;
     if (time > 0) {
-      fill(180,180,180, 250);
-      stroke(180,180,180, 250);
+      fill(180, 180, 180, 250);
+      stroke(180, 180, 180, 250);
       ellipse(posX, posY, taille, taille);
       noFill();
       stroke(180);
@@ -38,8 +38,8 @@ class Bulle {
   boolean finished() {
     return (time > 0)?false:true;
   }
-  
-  boolean isHit(float x, float y){
+
+  boolean isHit(float x, float y) {
     return (posX - x<50 && posY-y <50)?true:false;
   }
 } 
