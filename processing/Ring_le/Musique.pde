@@ -1,6 +1,6 @@
 import ddf.minim.analysis.*;
 import ddf.minim.*;
-
+// https://github.com/samuellapointe/ProcessingCubes/blob/master/cubes.pde
 class Musique {
 
   Minim minim;
@@ -21,6 +21,7 @@ class Musique {
   float strokeMultiplier = 1;
   float audioThresh = .5;
   Color myColorEllipse;
+  Color myColorTest;
   Color myColor;
 
   Musique(AudioPlayer j) {
@@ -31,6 +32,7 @@ class Musique {
     jingle.play(0);
     myColor =  new Color();
     myColorEllipse =  new Color();
+    myColorTest =  new Color();
   }
   void update() {
     for (int i = 0; i < jingle.bufferSize(); ++i) {
@@ -72,9 +74,10 @@ class Musique {
       } else {
         circles[i] = max(0, min(height, circles[i]-0.01));
       }
-      stroke(map(amplitude, 0, 1, 0, 255), 0, map(amplitude, 0, 1, 0, 102), amplitude*255);
+      float[] colors = myColorTest.update(.2);
+      stroke(colors[0],colors[1],colors[2], amplitude*255);
       strokeWeight(map(amplitude, 0, 1, STROKE_MIN, STROKE_MAX));
-      fill(map(amplitude, 0, 1, 0, 255), 0, map(amplitude, 0, 1, 0, 102), 150);
+      fill(colors[0],colors[1],colors[2], 150);
       ellipse(height/2+60, width/2-40, circles[i], circles[i]);
     }
     println();
