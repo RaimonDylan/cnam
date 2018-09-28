@@ -34,3 +34,30 @@
 **CHAMBRE** (<ins>codeChambre</ins>, nbreLits, tarif, #_codeCategorie_, #_codeLogement_)
 
 ![](http://image.noelshack.com/fichiers/2018/39/4/1538039218-exo2.jpg)
+
+## exo 3
+#### Dictionnaire de données : 
+- nomResponsable
+- noIntervention
+- DateIntervention
+- nomTechnicien
+- TempsPassé
+- nomClient
+- AdresseClient
+- NoClient
+- Distance
+- QuantitePiece
+- RefPiece
+- PrixPiece
+- NomPiece
+- NoFacture
+- DateEmissionFacture
+#### MEA
+![](http://image.noelshack.com/fichiers/2018/39/5/1538121796-a.png)
+#### modele relationnel
+**INTERVENTION** (<ins>noIntervention</ins>, dateIntervention, nomTech, tpsPasse, nomResp, _noFacture_)  
+**CLIENT** (<ins>noClient</ins>, nomClient, adresseClient, distance, _noFacture_)  
+**REMPLACE** (<ins>_noIntervention_</ins>, <ins>_refPiece_</ins>, qtePiece)  
+**PIECE** (<ins>refPiece</ins>, prix, nom)  
+**FACTURE** (<ins>noFacture</ins>, dateEmission)
+
