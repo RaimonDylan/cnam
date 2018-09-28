@@ -65,3 +65,40 @@
 - Combien a reçu de factures chaque client
 - Quelles sont les interventions pour lesquelles on a changé aucune pièce
 - Combien d'intervention par facture
+
+## Exo 2
+
+#### Dictionnaire de données : 
+CodePigiste
+NomPigiste
+AdressePigiste
+PrixLigne
+NomSport
+CorrespondantLocal
+NomEdition
+NbreExemplaires
+DateParution
+RefArticle
+Titre
+NbreLignes
+NoDeplacement
+DateDeplacement
+NomVille
+DistanceSiegeVille
+PuissanceFiscale
+PrixKm
+
+### MEA
+![](http://image.noelshack.com/fichiers/2018/39/5/1538128509-a.png)
+### modele relationnel
+**PIGISTE** (<ins>codePigiste</ins>, nomPigiste, adressePigiste, prixLigne)  
+**specialiste** (<ins>#_codePigiste_</ins>, <ins>#_nomSport_</ins>)  
+**SPORT** (<ins>nomSport</ins>, correspondantLocal)  
+**EDITION** (<ins>nomEdition</ins>, nbExemplaire)  
+**ARTICLE** (<ins>refArticle</ins>, titre, nbLigne, #_nomSport_, #_codePigiste_, #_nomEdition_, dateParution)  
+**VILLE** (<ins>nomVille</ins>, DistanceSiegeVille)  
+**VEHICULE** (<ins>puissance</ins>, Prix)  
+**DEPLACEMENT** (<ins>noDepl</ins>, dateDepl, #_nomVille_, #_refArticle_, #_puissance_)
+
+
+
