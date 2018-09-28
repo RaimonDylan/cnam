@@ -56,8 +56,8 @@
 ![](http://image.noelshack.com/fichiers/2018/39/5/1538121796-a.png)
 ### modele relationnel
 **INTERVENTION** (<ins>noIntervention</ins>, dateIntervention, nomTech, tpsPasse, nomResp, #_noFacture_)  
-**CLIENT** (<ins>noClient</ins>, nomClient, adresseClient, distance, #_noFacture_)  
+**CLIENT** (<ins>noClient</ins>, nomClient, adresseClient, distance)  
 **REMPLACE** (<ins>#_noIntervention_</ins>, <ins>#_refPiece_</ins>, qtePiece)  
 **PIECE** (<ins>refPiece</ins>, prix, nom)  
-**FACTURE** (<ins>noFacture</ins>, dateEmission)
+**FACTURE** (<ins>noFacture</ins>, dateEmission, #_noClient_)
 
