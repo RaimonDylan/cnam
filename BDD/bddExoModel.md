@@ -61,3 +61,7 @@
 **PIECE** (<ins>refPiece</ins>, prix, nom)  
 **FACTURE** (<ins>noFacture</ins>, dateEmission, #_noClient_)
 
+### Requete
+- Combien a reçu de factures chaque client
+- Quelles sont les interventions pour lesquelles on a changé aucune pièce
+- Combien d'intervention par facture
