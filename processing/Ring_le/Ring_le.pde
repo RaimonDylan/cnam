@@ -7,7 +7,7 @@ AudioPlayer jingle;
 boolean start = false;
 void setup()
 {
-  selectInput("Select a file to process:", "fileSelected");
+  selectInput("Selection de la musique :", "fileSelected");
   frameRate(60);
   minim = new Minim(this);
   size(700, 600);
