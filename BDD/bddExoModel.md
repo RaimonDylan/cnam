@@ -34,3 +34,72 @@
 **CHAMBRE** (<ins>codeChambre</ins>, nbreLits, tarif, #_codeCategorie_, #_codeLogement_)
 
 ![](http://image.noelshack.com/fichiers/2018/39/4/1538039218-exo2.jpg)
+
+## exo 3
+#### Dictionnaire de données : 
+- nomResponsable
+- noIntervention
+- DateIntervention
+- nomTechnicien
+- TempsPassé
+- nomClient
+- AdresseClient
+- NoClient
+- Distance
+- QuantitePiece
+- RefPiece
+- PrixPiece
+- NomPiece
+- NoFacture
+- DateEmissionFacture
+### MEA
+![](http://image.noelshack.com/fichiers/2018/39/5/1538121796-a.png)
+### modele relationnel
+**INTERVENTION** (<ins>noIntervention</ins>, dateIntervention, nomTech, tpsPasse, nomResp, #_noFacture_)  
+**CLIENT** (<ins>noClient</ins>, nomClient, adresseClient, distance)  
+**REMPLACE** (<ins>#_noIntervention_</ins>, <ins>#_refPiece_</ins>, qtePiece)  
+**PIECE** (<ins>refPiece</ins>, prix, nom)  
+**FACTURE** (<ins>noFacture</ins>, dateEmission, #_noClient_)
+
+### Requete
+- Combien a reçu de factures chaque client
+- Quelles sont les interventions pour lesquelles on a changé aucune pièce
+- Combien d'intervention par facture
+
+## Exo 2
+
+#### Dictionnaire de données : 
+CodePigiste
+NomPigiste
+AdressePigiste
+PrixLigne
+NomSport
+CorrespondantLocal
+NomEdition
+NbreExemplaires
+DateParution
+RefArticle
+Titre
+NbreLignes
+NoDeplacement
+DateDeplacement
+NomVille
+DistanceSiegeVille
+PuissanceFiscale
+PrixKm
+
+### MEA
+![](http://image.noelshack.com/fichiers/2018/39/5/1538128858-a.png)
+### modele relationnel
+**PIGISTE** (<ins>codePigiste</ins>, nomPigiste, adressePigiste, prixLigne)  
+**specialiste** (<ins>#_codePigiste_</ins>, <ins>#_nomSport_</ins>)  
+**SPORT** (<ins>nomSport</ins>, correspondantLocal)  
+**EDITION** (<ins>nomEdition</ins>, nbExemplaire)  
+**parait** (<ins>#_nomEdition_</ins>, <ins>_refArticle_</ins>, dateParution)  
+**ARTICLE** (<ins>refArticle</ins>, titre, nbLigne, #_nomSport_, #_codePigiste_)  
+**VILLE** (<ins>nomVille</ins>, DistanceSiegeVille)  
+**VEHICULE** (<ins>puissance</ins>, Prix)  
+**DEPLACEMENT** (<ins>noDepl</ins>, dateDepl, #_nomVille_, #_refArticle_, #_puissance_)
+
+
+
