@@ -71,7 +71,7 @@ class Musique {
 
     if (moy/10 > 50 && jingle.position() - pick > 500 ) {
 
-      mesBulles.add(new Bulle(random(50, 550), random(50, 550), 60, 3));
+      mesBulles.add(new Bulle(random(50, 550), random(50, 550), random(10,50), 3));
       pick = jingle.position();
     }
     //if (cpt > pop) {

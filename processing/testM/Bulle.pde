@@ -6,8 +6,7 @@ class Bulle {
   float tailleCercle;
   int time;
   int i = 0;
-  float[] circles = new float[29];
-  Bulle (float posX, float posY, int taille, int time) {  
+  Bulle (float posX, float posY, float taille, int time) {  
     this.posX = posX;
     this.posY = posY;
     this.taille = taille;
@@ -21,9 +20,13 @@ class Bulle {
     if (time > 0) {
       fill(180,180,180, 250);
       stroke(180,180,180, 250);
+      for (int i = 1; i < 30; i++) {
+        fill(0,0,0,10);
+        ellipse(posX, posY, taille/i, taille/i);
+      }
       ellipse(posX, posY, taille, taille);
     }
-    taille = taille + 0.6;
+    taille = taille + 0.5;
     i = (i == 59)?0:i+1;
   }
 
