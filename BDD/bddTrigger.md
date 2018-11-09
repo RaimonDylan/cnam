@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION updateNbEmpl()
 RETURNS TRIGGER
 AS $$
 BEGIN
-UPDATE NbPlacesParType SET nbEmpl = nbEmpl + new.nbrePersMax FROM NbPlacesParType WHERE type = new.TypeEmpl
+UPDATE NbPlacesParType SET nbEmpl = nbEmpl + 1 FROM NbPlacesParType WHERE type = new.TypeEmpl
 END;
 $$ LANGUAGE PLPGSQL;
 
