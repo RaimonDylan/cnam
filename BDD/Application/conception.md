@@ -22,4 +22,8 @@
 | nbStock_prd  |  int |   | NOT NULL > 0  |   |
 | num_type  |  int |   | NOT NULL auto_increment |   |
 | libelle_type  |  varchar |   | NOT NULL  |   |
+| nbProduit  |  int |   | NOT NULL > 0 |   |
+| nbProduit_pan  |  int |   | NOT NULL > 0 |   |
+
+
 
