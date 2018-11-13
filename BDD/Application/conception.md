@@ -54,7 +54,7 @@
 ```
 AVIS, 0N UTILISATEUR, 0N PRODUIT: date_avis, note_avis, description_avis
 
-UTILISATEUR: num_cli, email, mdp_cli, nom_cli, prenom_cli, ddn_cli, sexe_cli, adresse1_cli, adresse2_cli, cp_cli, ville_cli, dtInscription_cli
+UTILISATEUR: num_cli, email, mdp_cli, nom_cli, prenom_cli, ddn_cli, sexe_cli, adresse1_cli, adresse2_cli, cp_cli, ville_cli, dtLastConnexion, dtInscription_cli
 ENREGISTRER, 0N UTILISATEUR, 1N PRODUIT: nbProduit_pan
 :
 PRODUIT: num_prd, libelle_prd, prixHT_prd, nbStock_prd
