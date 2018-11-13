@@ -4,15 +4,19 @@
 
 | nom  | format  | règle  | contrainte  | catégorie  |
 |------|---------|--------|-------------|------------|
-| email_cli  |  varchar |   | NOT NULL CHECK (((email)::text ~* '^[0-9a-zA-Z._-]+@[0-9a-zA-Z._-]{2,}[.][a-zA-Z]{2,4}$'::text)) |   |
-| mdp_cli  |  password |   |  NOT NULL |   |
-| nom_cli  |  varchar |   |  NOT NULL |   |
-| prenom_cli  |  varchar |   | NOT NULL  |   |
-| sexe_cli  |  domaine('M','F','A') |   |  NOT NULL |   |
-| ddn_cli  |  date |   | NOT NULL <NOW()  |   |
-| rue_cli  |  varchar |   |  NOT NULL |   |
-| cp_cli  |  int |   | NOT NULL > 0  |   |
-| dtInscription_cli  |  date |   | NOT NULL <NOW() >ddn_cli |   |
+| num_user  |  password |   |  NOT NULL |   |
+| email_user  |  varchar |   | UNIQUE NOT NULL CHECK (((email)::text ~* '^[0-9a-zA-Z._-]+@[0-9a-zA-Z._-]{2,}[.][a-zA-Z]{2,4}$'::text)) |   |
+| mdp_user  |  password |   |  NOT NULL |   |
+| nom_user  |  varchar |   |  NOT NULL |   |
+| prenom_user  |  varchar |   | NOT NULL  |   |
+| sexe_user  |  domaine('M','F','A') |   |  NOT NULL |   |
+| ddn_user  |  date |   | NOT NULL <NOW()  |   |
+| adresse1_user  |  varchar |   |  NOT NULL |   |
+| adresse2_user  |  varchar |   |  NOT NULL |   |
+| cp_user  |  int |   | NOT NULL > 0  |   |
+| ville_user  |  varchar |   | NOT NULL  |   |
+| dtLastConnexion_user  |  date |   | NOT NULL <NOW() |   |
+| dtInscription_user  |  date |   | NOT NULL <NOW() >ddn_user |   |
 | num_cde  |  int |   | NOT NULL auto_increment |   |
 | date_cde  |  date |   | NOT NULL  |  <NOW() |
 | prixHT_cde |  float |   |  NOT NULL |  >0 |
@@ -45,6 +49,7 @@
 - Liste des utilisateurs qui ne sont pas connectées depuis 1 semaines avec des produits enregistrés
 - Liste des produits qui n'ont plus de stock
 - Liste des commandes qui n'ont pas encore été livrés
+- Mettre à jour la date de dernière connexion du client
 ### Triggers
 - Verification de la majorité de l'utilisateur lors de la commande
 - Vérification lors de l'insertion d'un avis si le client a bien passé une commande de cette article
