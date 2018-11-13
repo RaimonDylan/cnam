@@ -54,14 +54,12 @@ I = sin(2*pi*(50*x/256 + 10*y/256))+1;
 im = imread('photophore.tif');
 imf = double(im);
 image((imf+I)/4)
-colormap(gray)
 title('Image de base + sinus')
 figure('Name','FFT','NumberTitle','off')
 FI = fft2(I);
 M_FI = abs(FI);
 M_FI = fftshift(M_FI);
 image(M_FI)
-colormap(gray)
 title('HMMM')
 
 figure('Name','FINAL','NumberTitle','off')
@@ -71,5 +69,4 @@ FI(11,51) = 0;
 FI = fftshift(FI);
 im2 = ifft2(FI);
 image((abs(im2))/4)
-colormap(gray)
 title('FINAL')
