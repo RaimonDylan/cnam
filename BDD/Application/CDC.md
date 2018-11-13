@@ -39,9 +39,9 @@ Oceanic Fantasia souhaiterait donc améliorer cette présence en ligne.
  Notre société qui à beaucoup d'expérience dans la mise en place de site vitrine / e-commerce
  
   ### Solutions fonctionnelles 
-    Système de gestion des utilisateurs 
-    Système de gestion des stock
-    Système de gestion des nouveautés et des réductions (mails au utilisateurs)
+  - Système de gestion des utilisateurs 
+  - Système de gestion des stock
+  - Système de gestion des nouveautés et des réductions (mails au utilisateurs)
 
 
   ### Solutions techniques
