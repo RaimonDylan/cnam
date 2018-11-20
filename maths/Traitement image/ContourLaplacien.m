@@ -23,16 +23,17 @@
 ## Created: 2018-11-06
 
 function [result] = ContourLaplacien (imSrc, seuil)
-  masque = [0 1 0;1 -4 1; 0 1 0];
-  implap = conv2(imSrc,masque,'same');
-  impol = implap <= 0;
-  [n,m] = size(impol);
-  for i=0:n
-    for j=0:m
-      if(impol(i,j) == 0 && impol(i,j+1) == 1
-        imzero(i,j) = 1;
-       end
-    end
-  end
-  result = impol;
+  lpmsk = [0 1 0 ; 1 -4 1; 0 1 0];
+  imglap = conv2(imSrc,lpmsk,'same');
+  imgp = imglap > 0;
+  imgp1 = imgp(1:255,1:255); # image de base sans le dernier
+  imgph = imgp(1:255,2:256); # image translaté horizontalement
+  imgpv = imgp(2:256,1:255); # image translaté verticalement
+  imgz = (imgp1 ~= imgph) | (imgp1 ~= imgpv);
+  gx = [1 1 1; 0 0 0; -1 -1 -1];
+  gy = gx';
+  imgn = conv2(imSrc,gx,'same').^2 + conv2(imSrc,gy,'same').^2;
+  imgn = imgn(1:255,1:255);
+  cont = imgz & (imgn > seuil);
+  result = cont;
 endfunction
