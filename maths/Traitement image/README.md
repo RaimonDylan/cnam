@@ -1,6 +1,13 @@
 # RAPPORT DES TP - Traitement image
+# TP N° 1 : filtrage linéaire
 
-# TP 5 : Segmentation par attributs de texture
+## 1 - Visualiser les deux images et constater les effets du bruit pour différentes valeurs de et.
+![](https://i.imgur.com/xooJY4O.png)
+## 2 - Visualiser les différentes images filtrées. Que constate-t-on ?
+![](https://i.imgur.com/dS0KoyL.png)
+![](https://i.imgur.com/jS7d914.png)
+
+# TP N° 5 : Segmentation par attributs de texture
 
 
 ## 1 - Afficher l'image normalisée entre 0 et 64. Qu'observe-t-on ? Conclusion.
