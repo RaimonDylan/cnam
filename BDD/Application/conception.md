@@ -26,8 +26,8 @@
 | note_avis  |  float |   |  NOT NULL >=0 <=5 |   |
 | date_avis  |  date |   |  NOT NULL |   |
 | num_cde  |  int |   | NOT NULL auto_increment |   |
-| date_cde  |  date |   | NOT NULL  |  <NOW() |
-| prixHT_cde |  float |   |  NOT NULL |  >0 |
+| date_cde  |  date |   | NOT NULL <NOW() |   |
+| prixHT_cde |  float |   |  NOT NULL >0 |   |
 | num_type  |  int |   | NOT NULL auto_increment |   |
 | libelle_type  |  varchar |   | NOT NULL  |   |
 | nbProduit  |  int |   | NOT NULL >= 0 |   |
@@ -49,14 +49,35 @@
 ## Liste des fonctionnalités prises en charges par votre BD (fonctions, triggers).
 
 ### Fonctions
-- Liste des utilisateurs qui ne sont pas connectées depuis 1 semaines avec des produits enregistrés
-- Liste des produits qui n'ont plus de stock
-- Liste des commandes qui n'ont pas encore été livrés
-- Mettre à jour la date de dernière connexion du client
+- **Utilisateurs inactifs avec des produits enregistrés**
+  - Description : Liste des utilisateurs qui ne sont pas connectées depuis 1 semaines avec des produits dans le panier.
+  - Paramètres : ///
+  - Retour : Liste de client
+- **Produit en rupture de stock**
+  - Description : Liste des produits qui n'ont plus de stock
+  - Paramètres : ///
+  - Retour : Liste de produit
+- **Commandes en cours**
+  - Description : Liste des commandes qui n'ont pas encore été livrés
+  - Paramètres : ///
+  - Retour : Liste de commandes
+- **Note d'un produit**
+  - Description : Moyenne des tous les avis du produit
+  - Paramètres : id du produit
+  - Retour : note
 ### Triggers
-- Verification de la majorité de l'utilisateur lors de la commande
-- Vérification lors de l'insertion d'un avis si le client a bien passé une commande de cette article
-- Historiser les commandes lors de la livraison
+- **Commande par client majeur**
+  - Description : Verification de la majorité de l'utilisateur lors de la commande
+  - Paramètres : id du client
+  - Retour : ///
+- **Avis sur article commandé**
+  - Description : Vérification lors de l'insertion d'un avis si le client a bien passé une commande de cet article
+  - Paramètres : id du client
+  - Retour : ///
+- **Historique des commandes**
+  - Description : Historiser les commandes lors de la livraison
+  - Paramètres : ///
+  - Retour : ///
 
 ## MOCODO ONLINE
 ```
