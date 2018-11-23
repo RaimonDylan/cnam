@@ -61,10 +61,6 @@
   - Description : Liste des commandes qui n'ont pas encore été livrés
   - Paramètres : ///
   - Retour : Liste de commandes
-- **MAJ connexion client**
-  - Description : Mettre à jour la date de dernière connexion du client
-  - Paramètres : id du client
-  - Retour : ///
 - **Note d'un produit**
   - Description : Moyenne des tous les avis du produit
   - Paramètres : id du produit
@@ -75,7 +71,7 @@
   - Paramètres : id du client
   - Retour : ///
 - **Avis sur article commandé**
-  - Description : Vérification lors de l'insertion d'un avis si le client a bien passé une commande de cette article
+  - Description : Vérification lors de l'insertion d'un avis si le client a bien passé une commande de cet article
   - Paramètres : id du client
   - Retour : ///
 - **Historique des commandes**
