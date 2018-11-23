@@ -14,13 +14,13 @@ services:
         image: postgres:9
         volumes:
             - ./docker/postgres/logs:/var/log/postgresql
-            - ./simple-course.sql:/docker-entrypoint-initdb.d/simple-course.sql
+            - ./oceanic.sql:/docker-entrypoint-initdb.d/oceanic.sql
         ports:
             - 5432:5432
         environment:
             - POSTGRES_PASSWORD=changeme
             - POSTGRES_USER=postgres
-            - POSTGRES_DB=simple-course
+            - POSTGRES_DB=raimon
 
             
     phppgadmin:

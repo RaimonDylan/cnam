@@ -8,7 +8,7 @@ class DB
 	private static $dbport = 5432; // port du serveur
 	private static $dbuname = "postgres"; // login
 	private static $dbpass = "changeme"; // mot de passe
-	private static $dbname = "simple-course"; // nom de la base de données
+	private static $dbname = "raimon"; // nom de la base de données
 	////////////////////////////////////////////////////////////////////////////
 	public static function get()
 	{
@@ -32,11 +32,10 @@ class DB
 	}
 }
 // le code ci-dessous sert à tester la connexion.
-/*
-$r = DB::get()->query('select * from course;');
+
+$r = DB::get()->query('select * from client;');
 while($data = $r->fetch()) {
-echo $data['code'];
+echo $data['nom_cli'];
 }
-*/
 ?>
 

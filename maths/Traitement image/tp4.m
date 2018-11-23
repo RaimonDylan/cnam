@@ -45,7 +45,7 @@ subplot(1,2,2);
 x2 = 0:1:255;
 params = [ec_nuage m_nuage];
 y2 = gaussmf(x,params);
-plot(x, y);
+plot(x2, y2);
 str = sprintf('sous-image nuage\nEcart type = [%d]',ec_nuage);
 title(str);
 
