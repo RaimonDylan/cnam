@@ -26,8 +26,8 @@
 | note_avis  |  float |   |  NOT NULL >=0 <=5 |   |
 | date_avis  |  date |   |  NOT NULL |   |
 | num_cde  |  int |   | NOT NULL auto_increment |   |
-| date_cde  |  date |   | NOT NULL  |  <NOW() |
-| prixHT_cde |  float |   |  NOT NULL |  >0 |
+| date_cde  |  date |   | NOT NULL <NOW() |   |
+| prixHT_cde |  float |   |  NOT NULL >0 |   |
 | num_type  |  int |   | NOT NULL auto_increment |   |
 | libelle_type  |  varchar |   | NOT NULL  |   |
 | nbProduit  |  int |   | NOT NULL >= 0 |   |
