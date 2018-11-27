@@ -15,7 +15,7 @@
 ## 2 - 
   * 2 - a. Calculer les valeurs moyennes des deux images attributs. Conclusion.
   * 2 - b. Afficher les histogrammes des deux images attributs. On utilise pour cela la fonction hist(). Conclusion ?
-  ![](https://i.imgur.com/V5qTmyn.png)
+  ![](https://i.imgur.com/462Mn84.png)
 ## 3 -
   * 3 - a. En utilisant la fonction otsu() fournie calculer l'image segmentée de texture3.tif
   * 3 - b. Segmentation supervisée. 
