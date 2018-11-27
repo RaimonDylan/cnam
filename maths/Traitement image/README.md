@@ -87,4 +87,11 @@ niveaux de gris homogènes
   * Calculer l'image binaire par seuillage
   ![](https://i.imgur.com/XgfHAwy.png)
   ![](https://i.imgur.com/UyDaSSw.png)
+# TP N° 6 : Filtrage de la médiane
+## Comparer visuellement les résultats obtenus avec les images filtrées par la méthode de la médiane. Conclusions.
+- filtre médiane
+![](https://i.imgur.com/KttL0ep.png)
+- filtre linéaire
+![](https://i.imgur.com/Y5LocHF.png)
+- On peut voir que le filtre par la méthode de la médiane est plus performant que par la méthode linéaire.
 
