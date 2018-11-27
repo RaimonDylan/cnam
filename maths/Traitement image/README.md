@@ -22,6 +22,42 @@ Calcul de la performance du filtre où imf est l'image non bruitée et imf1 l'im
 ### c. Réaliser la manipulation pour différentes valeurs de A et B. Observer l'évolution des composantes fréquentielles.
 - Plus A est élevé plus le point est loin. Varier B reviens à varier la direction
 
+## Linéarité de la transformée de Fourier
+### a. Créer deux images sinusoïdales I1 et I2 avec des valeurs différentes de A et B comme précédemment. Créer ensuite l'image somme I = I1 + I2 ; (normalisée entre 0 et 255) de ces deux images.
+### b. Calculer le module de la transformée de Fourier de I en appliquant les différentes étapes précédentes. Afficher l'image résultat. Conclusion.
+![](https://i.imgur.com/NalRKxE.png)
+- On peut voir distinctement les points de l'image 1 et de l'image 2
+### c. Réaliser la même opération en effectuant la somme de plus de 2 images constituées de différentes composantes fréquentielles (différentes valeurs de A et B). Observer le résultat sur le module de la transformée de Fourier. Conclusion.
+![](https://i.imgur.com/1c29OBL.png)
+- Chaque composantes fréquentielles rajoute deux points sur le module de la transformée de Fourier
+
+## Filtrage dans l'espace des fréquences
+### a. Réaliser l'image perturbée en ajoutant à l'image im l'image I de la sinusoïde (sans oublier de convertir im en double). Afficher l'image résultat. Conclusion.
+![](https://i.imgur.com/nfGPquk.png)
+- On observe notre image perturbée par notre sinusoïde
+
+### b. Afficher l'image du module et localiser les coordonnées des pics.
+![](https://i.imgur.com/LLkFXSB.png)
+
+### c. Calculer l'image de la transformée de Fourier de im + I. Afin de pouvoir calculer la transformation inverse, il est nécessaire de conserver les composantes complexes de la transformée de Fourier.
+![](https://i.imgur.com/BF0uJji.png)
+
+### d. Réaliser le filtrage dans l'espace des fréquences.
+![](https://i.imgur.com/0U7uR0M.png)
+- on a retiré de notre image la sinusoïde
+
+# TP N° 3 : Détection de contour
+
+```matlab
+et = 5;
+imgd2 = imgd + et*randn(size(imgd));
+```
+## ContourLaPlacien
+![](https://i.imgur.com/Ywy99pL.png)
+
+## Canny
+![](https://i.imgur.com/2Tf2btm.png)
+
 
 # TP N° 5 : Segmentation par attributs de texture
 
