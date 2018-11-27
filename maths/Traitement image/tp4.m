@@ -38,7 +38,7 @@ subplot(1,2,1);
 x = 0:1:255;
 y = gaussmf(x,params);
 plot(x, y);
-str = sprintf('sous-image fond\nEcart type = [%d]',ec_fond);
+str = sprintf('sous-image fond\nMoyenne = [%d]\nEcart type = [%d]',m_fond,ec_fond);
 title(str);
 
 subplot(1,2,2);
@@ -46,7 +46,7 @@ x2 = 0:1:255;
 params = [ec_nuage m_nuage];
 y2 = gaussmf(x,params);
 plot(x2, y2);
-str = sprintf('sous-image nuage\nEcart type = [%d]',ec_nuage);
+str = sprintf('sous-image nuage\nMoyenne = [%d]\nEcart type = [%d]',m_nuage,ec_nuage);
 title(str);
 
 figure('Name','Determiner le seuil','NumberTitle','off')

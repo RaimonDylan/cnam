@@ -35,7 +35,10 @@ title('FFT')
 
 I1 = sin(2*pi*(2*x/256 + 20*y/256))+1;
 I2 = sin(2*pi*(20*x/256 + 2*y/256))+1;
-I = I1+I2;
+I3 = sin(2*pi*(10*x/256 + 10*y/256))+1;
+I4 = sin(2*pi*(50*x/256 + 30*y/256))+1;
+I5 = sin(2*pi*(30*x/256 + 1*y/256))+1;
+I = I1+I2+I3+I4+I5;
 
 FI = fft2(I);
 M_FI = abs(FI);
@@ -54,13 +57,15 @@ I = sin(2*pi*(50*x/256 + 10*y/256))+1;
 im = imread('photophore.tif');
 imf = double(im);
 image((imf+I)/4)
+colormap(gray); 
 title('Image de base + sinus')
 figure('Name','FFT','NumberTitle','off')
-FI = fft2(I);
+FI = fft2(I+im);
 M_FI = abs(FI);
 M_FI = fftshift(M_FI);
 image(M_FI)
-title('HMMM')
+colormap(gray); 
+title('Image de la transformée de Fourier de im + I')
 
 figure('Name','FINAL','NumberTitle','off')
 FI = fft2(im+I);
@@ -69,4 +74,5 @@ FI(11,51) = 0;
 FI = fftshift(FI);
 im2 = ifft2(FI);
 image((abs(im2))/4)
-title('FINAL')
+colormap(gray); 
+title('FI(247,207) = 0 FI(11,51) = 0 ')

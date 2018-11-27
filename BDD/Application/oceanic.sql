@@ -248,12 +248,11 @@ RETURNS TRIGGER
 LANGUAGE plpgsql
 AS $function$
    BEGIN
-      INSERT INTO COMMANDEHISTORIQUE (num_cde, date_cde, prixHT_cde, num_cli)
-      SELECT num_cde, date_cde, prixHT_cde, num_cli
-      FROM COMMANDE
+      INSERT INTO COMMANDEHISTORIQUE (num_cde, num_prd, nbProduit)
+      SELECT num_cde, num_prd, nbProduit
+      FROM LIGNECOMMANDE
       WHERE num_cde = new.num_cde;
       DELETE FROM LIGNECOMMANDE WHERE num_cde = new.num_cde;
-      DELETE FROM COMMANDE WHERE num_cde = new.num_cde;
       RETURN NULL;
     END;
 $function$;

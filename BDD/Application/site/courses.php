@@ -18,15 +18,19 @@ error_reporting(E_ALL);
 <?php
 include ('config.php');
 // On appelle la méthode statique get() de la classe DB qui renvoit une instance du PDO.
-$request = DB::get()->query('select * from course');
+$request = DB::get()->query('select * from client');
 ?>
 	<table>
 		<caption>Liste des cours disponibles</caption>
 		<thead>
 			<tr>
-				<th>Code</th>
+				<th>Prénom</th>
 				<th>Nom</th>
-				<th>Description</th>
+				<th>Sexe</th>
+				<th>Adresse</th>
+				<th>CP</th>
+				<th>Ville</th>
+				<th>date dernière connexion</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -35,10 +39,13 @@ $request = DB::get()->query('select * from course');
 while($data = $request->fetch()) {
 	?>
 	<tr>
-		<td><?php echo	$data['code']; ?></td> <!-- 'code' est une colonne de la BDD. -->
-		<td><?php echo	$data['name']; ?></td>
-		<td><?php echo	$data['description']; ?></td>
-	</tr>
+		<td><?php echo	$data['prenom_cli']; ?></td>
+		<td><?php echo	$data['nom_cli']; ?></td>
+		<td><?php echo	$data['sexe_cli']; ?></td>
+		<td><?php echo	$data['adresse1_cli']; ?></td>
+		<td><?php echo	$data['cp_cli']; ?></td>
+		<td><?php echo	$data['ville_cli']; ?></td>	</tr>
+		<td><?php echo	$data['dtlastconnexion_cli']; ?></td>	</tr>
 	<?php
 }
 $request->closeCursor(); // ne pas oublier de fermer le curseur.

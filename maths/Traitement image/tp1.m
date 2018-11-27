@@ -35,7 +35,11 @@ subplot(2,1,1);
 image(imf1/4)
 colormap(gray)
 [n,m]=size(imf/4);
-perf=sqrt(sum(sum((imf-imf1).^2))/(n*m));
+%perf=sqrt(sum(sum((imf-imf1).^2))/(n*m));
+[N,M] = size(imf/4);
+
+
+perf = sqrt((1/(N*M))*(sum(sum((imf - imf1).^2))));
 str = sprintf('Filtre 3x3\nPerformance = [%d]',perf);
 title(str);
 
