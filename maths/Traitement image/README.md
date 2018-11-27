@@ -92,6 +92,6 @@ niveaux de gris homogènes
 - filtre médiane
 ![](https://i.imgur.com/KttL0ep.png)
 - filtre linéaire
-![](https://i.imgur.com/Y5LocHF.png)
+![](https://i.imgur.com/wvhf0df.png)
 - On peut voir que le filtre par la méthode de la médiane est plus performant que par la méthode linéaire.
 
