@@ -4,10 +4,11 @@ clear all function
 I = imread('photophore.tif');
 
 J = imnoise(I,'salt & pepper',0.02);
+J2 = imnoise(I,'salt & pepper',0.02);
 
 K = medfilt2(J, [3 3]);
 flt1 = ones(3)/9;
-Y = conv2(I,flt1,'same');
+Y = conv2(J2,flt1,'same');
 
 r=MC(I,K,1)
 r2=MC(I,Y,1)
