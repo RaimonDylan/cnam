@@ -58,6 +58,17 @@ imgd2 = imgd + et*randn(size(imgd));
 ## Canny
 ![](https://i.imgur.com/2Tf2btm.png)
 
+# TP N° 4 : Segmentation d’image
+
+## Le résultat est l'image imb ne contenant que des « 1 » et des « 2 » correspondant aux deux classes détectées. Afficher l'image segmentée obtenue en la normalisant entre 0 et 64. Conclusion.
+![](https://i.imgur.com/yFqFm6f.png)
+- On peut voir apercevoir notre nuage en blanc et le ciel en noir
+## Extraire deux sous images correspondant respectivement au « nuage » et au « ciel ». Calculer les valeurs moyennes de ces deux sous images. Afficher les histogrammes des deux sous images. Calculer les écarts types des deux sous images.
+![](https://i.imgur.com/TbNqTqF.png)
+
+## Calculer analytiquement le seuil de la figure 2. Appliquer ce seuillage sur l'image nuageNDG.bmp Comparer les résultats obtenus avec les deux méthodes (otsu et supervisée). Conclusion.
+![](https://i.imgur.com/TIXNCNN.png)
+- On voit que avec la méthode supervisée on est plus proche du nuage de départ, on arrive à garder la forme de départ
 
 # TP N° 5 : Segmentation par attributs de texture
 
