@@ -45,6 +45,16 @@ public class IRSystem {
 			invertedIndex.put(word, new ArrayList<Integer>());
 		}
 		
+		for (ArrayList<String> document : documents) {
+			for (String word : document) {
+				if(!invertedIndex.get(word).contains(documents.indexOf(document))) {
+					invertedIndex.get(word).add(documents.indexOf(document));
+					docFreq.incrementCount(word, 1);
+				}
+				docTermFrequency.incrementCount(word, documents.indexOf(document), 1);
+			}
+		}
+		
 		/* End TODO */
 	}
 
@@ -64,10 +74,10 @@ public class IRSystem {
 
 		tfidf = new CounterMap<String, Integer>();
 		for (String word : vocab) {
+			double idf = Math.log10(documents.size()/docFreq.getCount(word));
 			for (int d = 0; d < documents.size(); d++) {
-				tfidf.setCount(word, new Integer(d), 0.0);
-				if(documents.get(d).contains(word))
-					invertedIndex.get(word).add(d);
+				double tf = 1.0 + Math.log10(docTermFrequency.getCount(word, d));
+				tfidf.setCount(word, new Integer(d), tf*idf);
 			}
 		}
 		/* End TODO */
@@ -81,6 +91,7 @@ public class IRSystem {
 		 * Indice: s'écrit en 1 ligne.
 		 */
 		/* End TODO */
+		tfidf_score = tfidf.getCount(word, doc);
 
 		return tfidf_score;
 	}
@@ -103,7 +114,7 @@ public class IRSystem {
 		 * 
 		 * Indice: s'écrit en 1 ligne.
 		 */
-		
+		posting = invertedIndex.get(word);
 
 		/* End TODO */
 		return posting;
@@ -135,8 +146,17 @@ public class IRSystem {
 
 		ArrayList<Integer> docs = new ArrayList<Integer>();
 		for (int d = 0; d < documents.size(); d++) {
-			docs.add(new Integer(d));
+			int a = 0;
+			for (String word : query) {
+				if(invertedIndex.get(word).contains(d)) {
+					a++;
+				}
+				if(query.size() == a)
+					docs.add(d);
+			}
+			
 		}
+		
 		/* End TODO */
 		Collections.sort(docs);
 		return docs;
@@ -145,27 +165,29 @@ public class IRSystem {
 	public PriorityQueue<Integer> rankRetrieve(ArrayList<String> query) {
 		double scores[] = new double[documents.size()];
 		double lenght[] = new double[documents.size()];
-
 		/*************************************************************/
 		/**
 		 * TODO: Implanter la mesure de similarité cosinus (cosine similarity)
 		 */
 
-		/* Actuellement, c'est la mesure de Jaccard qui est utilisée. */
-		HashSet<String> wordsInQuery = new HashSet<String>();
-		wordsInQuery.addAll(query);
-		HashSet<String> wordsInDoc;
-		HashSet<String> setUnion;
-		HashSet<String> setIntersection;
-		for (int d = 0; d < documents.size(); d++) {
-			wordsInDoc = new HashSet<String>();
-			wordsInDoc.addAll(documents.get(d));
-			setUnion = new HashSet<String>(wordsInDoc);
-			setUnion.addAll(wordsInQuery);
-			setIntersection = new HashSet<String>(wordsInQuery);
-			setIntersection.retainAll(wordsInDoc);
-			scores[d] = ((double) setIntersection.size()) / ((double) setUnion.size());
+		for (String word : query) {
+			double wtq = 1;
+			for(int i : getPosting(word)) {
+				scores[i] += wtq * getTFIDF(word, i);
+			}
 		}
+		
+		
+		
+		for (ArrayList<String> document : documents) {
+			int i = documents.indexOf(document);
+			double acc = 0;
+			for (String word : new HashSet<>(document)) {
+				acc += Math.pow(getTFIDF(word, i), 2);
+			}
+			scores[i] /= Math.sqrt(acc);
+		}
+		
 		/* End TODO */
 
 		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
@@ -178,7 +200,6 @@ public class IRSystem {
 			double priority = pq.getPriority();
 			topTen.add(pq.next(), priority);
 		}
-
 		return topTen;
 	}
 
@@ -440,7 +461,7 @@ public class IRSystem {
 
 			String problem = questions.get(part);
 			String soln = solutions.get(part);
-
+			
 			if (part == 0) { // Inverted Index test
 				System.out.println("Inverted Index Test");
 
