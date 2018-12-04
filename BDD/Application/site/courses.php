@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
    <head>
-       <title>Cours disponibles</title>
+       <title>Client</title>
        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
        <link rel="stylesheet" media="screen" type="text/css" title="style_tab" href="css/default.css" />
    </head>
@@ -21,7 +21,7 @@ include ('config.php');
 $request = DB::get()->query('select * from client');
 ?>
 	<table>
-		<caption>Liste des cours disponibles</caption>
+		<caption>Liste des clients</caption>
 		<thead>
 			<tr>
 				<th>Prénom</th>
@@ -54,8 +54,8 @@ $request->closeCursor(); // ne pas oublier de fermer le curseur.
 </table>
 
 <!-- Toutes les données du formulaire seront envoyées à la page 'insertCourse.php' avec la méthode POST. -->
-<form method="post" action="insertCourse.php">
-	<table><caption>Ajout d'un cours</caption>
+<form method="post" action="insertClient.php">
+	<table><caption>Ajout d'un client</caption>
 		<tr><td>Code : </td><td><input type="text" name="code" /></td></tr> </br>
 		<tr><td>Nom : </td><td><input type="text" name="name" /></td></tr></br>
 		<tr><td>Description : </td><td><textarea name="description" rows="5" cols="40"></textarea></tr></br> 

@@ -32,10 +32,11 @@ class DB
 	}
 }
 // le code ci-dessous sert à tester la connexion.
-
+/*
 $r = DB::get()->query('select * from client;');
 while($data = $r->fetch()) {
 echo $data['nom_cli'];
 }
+*/
 ?>
 
