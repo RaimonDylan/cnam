@@ -331,7 +331,26 @@ body {
     background-color: #FF244A!important
 }
 .question{
-	margin-top:60px;
+	margin-top:100px;
+}
+
+.minuteur {
+  color: #333;
+  text-align: center;
+}
+
+
+.sec {
+  display: inline-block;
+  font-size: 1.5em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+}
+
+.sec > span {
+  display: block;
+  font-size: 4.5rem;
 }
 
 @media only screen and (max-width: 800px) {

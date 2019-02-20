@@ -51,14 +51,10 @@
 
     <div style="text-align:center;">
         <div id="btnDownload" class="btn rubberBand animated" style="background-color: #992C61;color: #FFF;padding: 1%;padding-left:70px;
-        padding-right: 70px;font-size: 25px;cursor: pointer;margin-top: 450px;">Start</div>
-        <h1 id="question" class="question" style='display:none;color:#fff'><?php echo $donneesQuestion['libelle']; ?></h1>
+        padding-right: 70px;font-size: 25px;cursor: pointer;margin-top: 350px;">Start</div>
+        <h3 id="question" class="question" style='display:none;color:#fff'><?php echo $donneesQuestion['libelle']; ?></h3>
 
-        <div class="minuteur" style="display:none;">
-          <ul>
-            <li><span id="seconds"></span>Secondes</li>
-          </ul>
-        </div>
+        
         <?php
         $i=0;
         $rl = "fadeleft";
@@ -76,6 +72,11 @@
 
 $reponse->closeCursor(); // Termine le traitement de la requête
 ?>
+        <div class="minuteur" style="display:none;color:#fff;">
+          <ul style="padding-inline-start: 0px;">
+            <li class="sec"><span id="seconds"></span>Secondes</li>
+          </ul>
+        </div>
     </div>
 
 
@@ -91,6 +92,8 @@ $reponse->closeCursor(); // Termine le traitement de la requête
 
 
     <script type="text/javascript" src="js/monscript.js"></script>
+
+    
 </body>
 </html>
 
