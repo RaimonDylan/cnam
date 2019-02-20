@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fame - Battle Royale</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="icon" type="image/png" href="images/logo.png" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/parallax.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html"><img class="logo" src="images/logo.png" alt="logo"  width=45 height=45></a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav ">
+                    <li class="accueil"><a style="z-index: 2 !important;" href="index.html">Accueil</a></li>
+                    <li class="actualites"><a style="margin-left: 15px;z-index: 2 !important;" href="actualites.html">Actualités</a></li>
+                    <li class="active classement"><a style="margin-right: 17px;z-index: 2 !important;" href="classement.html">Classement</a></li>
+                    <li class="forum"><a style="margin-right: 40px;z-index: 2 !important;" href="forum/index.php" target="_blank">Forum</a></li>
+                    <li class="medias"><a style="margin-right: 15px;z-index: 2 !important;" href="medias.html">Médias</a></li>
+                    <li class="contact"><a style="z-index: 2 !important;" href="contact.html">Contact</a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="tabClassement">
+<h2 >My Customers</h2>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Recherche par pseudo" title="Pseudo" >
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width:10%;"></th>
+    <th class="pseudo" style="width:20%;">Pseudo</th>
+    <th class="parties" style="width:20%;">Parties jouées</th>
+    <th class="victoire" style="width:15%;">Victoires</th>
+    <th class="temps" style="width:20%;">Temps joué</th>
+    <th class="score" style="width:15%;">Score</th>
+  </tr>
+  <tr id="cl_lordkent" class="or">
+    <td style="padding:0px !important;"><img src="images/or.png" alt="or" height="42" width="42"></td>
+    <td class="pseudo">Lordkent</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">125607</td>
+  </tr>
+  <tr id="cl_express" class="argent">
+    <td style="padding:0px !important;"><img src="images/argent.png" alt="or" height="42" width="42"></td>
+    <td class="pseudo">Express</td>
+    <td class="parties">25</td>
+    <td class="victoire">12</td>
+    <td class="temps">20:14:52</td>
+    <td class="score">125606</td>
+  </tr>
+  <tr id="cl_lithium" class="bronze">
+    <td style="padding:0px !important;"><img src="images/bronze.png" alt="or" height="42" width="42"></td>
+    <td class="pseudo">Lithium</td>
+    <td class="parties">13</td>
+    <td class="victoire">6</td>
+    <td class="temps">13:38:43</td>
+    <td class="score">84756</td>
+  </tr>
+  <tr id="cl_kalash">
+    <td>4</td>
+    <td class="pseudo">Kalash</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">81447</td>
+  </tr>
+  <tr id="cl_dylkiller">
+    <td>5</td>
+    <td class="pseudo">Dylkiller</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">80310</td>
+  </tr>
+  <tr id="cl_hirokilen">
+    <td>6</td>
+    <td class="pseudo">Hirokilen</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">71444</td>
+  </tr>
+  <tr id="cl_kromiss">
+    <td>7</td>
+    <td class="pseudo">Kromiss</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">67878</td>
+  </tr>
+  <tr id="cl_asato">
+    <td>8</td>
+    <td class="pseudo">Asato</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">64787</td>
+  </tr>
+    <tr id="cl_kowmap">
+    <td>9</td>
+    <td class="pseudo">Kowmap</td>
+    <td class="parties">15</td>
+    <td class="victoire">10</td>
+    <td class="temps">10:23:25</td>
+    <td class="score">51748</td>
+  </tr>
+</table>
+            </div>
+        <div id="classement" style="background: #3a6186;background: -webkit-linear-gradient(to left, #3a6186 , #89253e);background: linear-gradient(to left, #3a6186 , #89253e);color : #fff;height:auto;margin-top: 51px;margin-bottom: 55px; min-height: 600px;display:none;">
+            <div style="margin:1%;overflow: auto;padding-top: 1%;margin-top: 51px;">
+                <div id="btn1" class="backClassement" style="background-color: #992C61;color: #FFF;padding: 1%;width: 21%;font-size: 18px;cursor:pointer;"><i style="color:#fff;margin-right: 10px;" class="fas fa-arrow-left"></i>Revenir au classement</div>
+                <div class="pseudo"><span id="pseudo"></span></div>
+                <div class="parties"><span id="parties"></span></div>
+                <div class="victoire"><span id="victoire"></span></div>
+                <div class="temps"><span id="temps"></span></div>
+                <div class="score"><span id="score"></span></div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="pub" style="float:left;cursor:pointer;" ><i style="color:#fff;" class="fab fa-facebook-square fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-twitter-square fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-twitch fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-youtube fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-instagram fa-2x"></i></div>
+            <div id="nameGame" style="float: left;margin-left: 25%;margin-top: 1%;cursor:pointer;font-size: 25px;"><span style="color:#fff;">FAME - BATTLEROYALE</span></div>
+            <div id="top" style="float: right;margin-right: 5%;margin-top: 1%;cursor:pointer;"><i style="color:#fff;" class="fas fa-arrow-up fa-2x"></i></div>
+        </div>
+        <script type="text/javascript" src="js/monscript.js"></script>
+        <script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+    </body>
+</html>

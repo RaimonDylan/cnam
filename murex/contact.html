@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fame - Battle Royale</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="icon" type="image/png" href="images/logo.png" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/parallax.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <style>
+        .content-header{
+  font-family: 'Oleo Script', cursive;
+  color:#fcc500;
+  font-size: 45px;
+}
+
+.section-content{
+  text-align: center; 
+
+}
+#contact{
+    
+    font-family: 'Teko', sans-serif;
+  padding-top: 60px;
+  width: 100%;
+  width: 100vw;
+  height: 650px;
+  background: #3a6186; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color : #fff;    
+}
+.contact-section{
+  padding-top: 40px;
+}
+.contact-section .col-md-6{
+  width: 50%;
+}
+
+.form-line{
+  border-right: 1px solid #B29999;
+}
+
+.form-group{
+  margin-top: 10px;
+}
+label{
+  font-size: 1.3em;
+  line-height: 1em;
+  font-weight: normal;
+}
+.form-control{
+  font-size: 1.3em;
+  color: #080808;
+}
+textarea.form-control {
+    height: 135px;
+   /* margin-top: px;*/
+}
+
+.submit{
+  font-size: 1.1em;
+  float: right;
+  width: 150px;
+  background-color: transparent;
+  color: #fff;
+
+}</style>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html"><img class="logo" src="images/logo.png" alt="logo"  width=45 height=45></a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav ">
+                    <li class="accueil"><a style="z-index: 2 !important;" href="index.html">Accueil</a></li>
+                    <li class="actualites"><a style="margin-left: 15px;z-index: 2 !important;" href="actualites.html">Actualités</a></li>
+                    <li class="classement"><a style="margin-right: 17px;z-index: 2 !important;" href="classement.html">Classement</a></li>
+                    <li class="forum"><a style="margin-right: 40px;z-index: 2 !important;" href="forum/index.php" target="_blank">Forum</a></li>
+                    <li class="medias"><a style="margin-right: 15px;z-index: 2 !important;" href="medias.html">Médias</a></li>
+                    <li class="active contact"><a style="z-index: 2 !important;" href="contact.html">Contact</a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+         
+        <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+   	<link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+   	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+<section id="contact">
+			<div class="section-content">
+				<h1 class="section-header">Formulaire de <span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Contact</span></h1>
+			</div>
+			<div class="contact-section">
+			<div class="container">
+				<form>
+					<div class="col-md-6 form-line formcontact">
+			  			<div class="form-group">
+			  				<label for="exampleInputUsername">Nom</label>
+					    	<input type="text" class="form-control" id="" placeholder=" Entrer votre nom">
+				  		</div>
+				  		<div class="form-group">
+					    	<label for="exampleInputEmail">Adresse Email</label>
+					    	<input type="email" class="form-control" id="exampleInputEmail" placeholder=" Entre votre adresse email">
+					  	</div>	
+					  	<div class="form-group">
+					    	<label for="telephone">Numéro de mobile</label>
+					    	<input type="tel" class="form-control" id="telephone" placeholder=" Entrer votre numéro">
+			  			</div>
+			  		</div>
+			  		<div class="col-md-6 formcontact">
+			  			<div class="form-group">
+			  				<label for ="description"> Message</label>
+			  			 	<textarea  class="form-control" id="description" placeholder="Entrer votre message" style="resize: none;"></textarea>
+			  			</div>
+			  			<div>
+
+			  				<button type="button" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Envoyer le message</button>
+			  			</div>
+			  			
+					</div>
+				</form>
+			</div>
+    </div>
+		</section>
+        
+        
+
+
+
+
+
+
+
+        
+        
+        
+        
+<div class="footer">
+            <div class="pub" style="float:left;cursor:pointer;" ><i style="color:#fff;" class="fab fa-facebook-square fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-twitter-square fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-twitch fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-youtube fa-2x"></i></div>
+            <div class="pub" style="float:left;cursor:pointer;"><i style="color:#fff;" class="fab fa-instagram fa-2x"></i></div>
+            <div id="nameGame" style="float: left;margin-left: 25%;margin-top: 1%;cursor:pointer;font-size: 25px;"><span style="color:#fff;">FAME - BATTLEROYALE</span></div>
+            <div id="top" style="float: right;margin-right: 5%;margin-top: 1%;cursor:pointer;"><i style="color:#fff;" class="fas fa-arrow-up fa-2x"></i></div>
+        </div>
+        <script type="text/javascript" src="js/monscript.js"></script>
+    
+    </body>
+</html>
