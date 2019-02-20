@@ -16,20 +16,16 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background-image: url('images/background2.jpg');">
     <?php
-    try
-    {
-        $bdd = new PDO('mysql:host=famebattdwadmin.mysql.db;dbname=famebattdwadmin;charset=utf8', 'famebattdwadmin', 'ResidentEvil6');
 
-    }
-    catch (Exception $e)
-    {
-            die('Erreur : ' . $e->getMessage());
-    }
-    $question = $bdd->query('SELECT * FROM question where id_question = 1');
+    include ('config.php');
+
+    $question = DB::get()->query('SELECT * FROM question where id_question = 1');
     $donneesQuestion = $question->fetch();
-    $reponse = $bdd->query('SELECT * FROM answer where id_question = 1');
+    $reponse = DB::get()->query('SELECT * FROM answer where id_question = 1');
+
+
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -53,10 +49,16 @@
     </nav>
 
 
-    <div style="text-align:center;" class="parallax-window" data-parallax="scroll" data-image-src="images/background2.jpg">
+    <div style="text-align:center;">
         <div id="btnDownload" class="btn rubberBand animated" style="background-color: #992C61;color: #FFF;padding: 1%;padding-left:70px;
         padding-right: 70px;font-size: 25px;cursor: pointer;margin-top: 450px;">Start</div>
         <h1 id="question" class="question" style='display:none;color:#fff'><?php echo $donneesQuestion['libelle']; ?></h1>
+
+        <div class="minuteur" style="display:none;">
+          <ul>
+            <li><span id="seconds"></span>Secondes</li>
+          </ul>
+        </div>
         <?php
         $i=0;
         $rl = "fadeleft";
