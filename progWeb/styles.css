@@ -1,3 +1,24 @@
 ul{
     list-style-type: none;
 }
+
+.title{
+    color: #4b5154;
+    padding: 2%;
+    border-left:6px solid #4b5154;
+    margin-top:2%;
+}
+
+.title b{
+    font-size:2em;
+}
+
+p,div{
+    font-family: Roboto !important;
+}
+
+.cp{
+    margin-bottom:5%;
+    font-size:1.5em;
+}
+
