@@ -2,6 +2,38 @@ ul{
     list-style-type: none;
 }
 
+.blocLeft{
+    float:left;
+    width:40%;
+    background-color:#4b5154;
+    color:#FFF;
+    height:100%;
+}
+.blocRight{
+    float:right;
+    width:60%;
+}
+
+.barLeft{
+    display:inline-block;
+    border:1px solid #fff;
+    min-height:14px;
+    background-color:#fff;
+}
+.barRight{
+    display:inline-block;
+    border:1px solid #fff;
+    min-height:14px;
+}
+
+.photo{
+    border-radius: 150px;
+}
+
+.name{
+    font-size:2.5em;
+}
+
 .title{
     color: #4b5154;
     padding: 2%;
