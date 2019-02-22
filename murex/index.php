@@ -50,28 +50,12 @@
 
 
     <div style="text-align:center;">
-        <div id="btnDownload" class="btn rubberBand animated" style="background-color: #992C61;color: #FFF;padding: 1%;padding-left:70px;
-        padding-right: 70px;font-size: 25px;cursor: pointer;margin-top: 350px;">Start</div>
-        <h3 id="question" class="question" style='display:none;color:#fff'><?php echo $donneesQuestion['libelle']; ?></h3>
+        <div class="arc">
+        </div>
+        <div id="panelQuestion">
 
+        </div>
         
-        <?php
-        $i=0;
-        $rl = "fadeleft";
-        while ($donnees = $reponse->fetch())
-        {
-            $rl=($i%2==0)?"fadeleft":"faderight";
-            $style = ($i%2==0)?"display:none;float:left;margin-left:10%;margin-top:2%;":"display:none;float:right;margin-right:10%;margin-top:2%;";
-            $lib = $donnees['libelle'];
-            echo '<div class="choice '.$rl.'" style="'.$style.'"> 
-            <p>'.$lib.'</p>
-            </div>';
-            $i++;
-        }
-        
-
-$reponse->closeCursor(); // Termine le traitement de la requête
-?>
         <div class="minuteur" style="display:none;color:#fff;">
           <ul style="padding-inline-start: 0px;">
             <li class="sec"><span id="seconds"></span>Secondes</li>

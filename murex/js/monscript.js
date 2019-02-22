@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 	seconds = 20;
 	minuteur = false;
+	waitQuestion = true;
 	$("#btnDownload").click(function() {
 		$(this).hide();
 		$(".fadeleft").addClass("fadeInLeft animated");
@@ -34,6 +35,21 @@ $(document).ready(function() {
 	})
 
     setInterval(function() {
+    	if(waitQuestion){
+    		$.ajax({
+		        	url:"waitQuestion.php",
+		        	type:"POST",
+		        	success:function(retour) {
+		        		if(retour != "false"){
+		        			$('#panelQuestion').empty().append(retour);
+		        			waitQuestion = false;
+		        		}
+		       		},
+		       		error:function(){
+		        		alert("error");
+		       		}
+			    });
+    	}
 		if(minuteur){
 			$("#seconds").text(seconds);
 			seconds--;
@@ -52,7 +68,6 @@ $(document).ready(function() {
 			    });
 			}
 		}
-
 
 	}, 1000);
 });
