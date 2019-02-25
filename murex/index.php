@@ -37,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="index.html"><img class="logo" src="images/logo.png" alt="logo"  width=45 height=45></a>
+                <a href="index.php"><img class="logo" src="images/logo.png" alt="logo"  width=45 height=45></a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav ">

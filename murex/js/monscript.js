@@ -41,12 +41,14 @@ $(document).ready(function() {
 		        	type:"POST",
 		        	success:function(retour) {
 		        		if(retour != "false"){
+		        			alert(retour);
 		        			$('#panelQuestion').empty().append(retour);
 		        			waitQuestion = false;
 		        		}
 		       		},
-		       		error:function(){
-		        		alert("error");
+		       		error:function(xhr, status, error){
+						var err = eval("(" + xhr.responseText + ")");
+						alert(err.Message);
 		       		}
 			    });
     	}

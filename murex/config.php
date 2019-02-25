@@ -16,7 +16,6 @@ class DB
 	   try
 	   {
 	    self::$instance =  new PDO("mysql:host=".self::$dbhost.";dbname=".self::$dbname.";charset=utf8", self::$dbuname, self::$dbpass); // 
-		//self::$instance = new PDO("pgsql:user=VOTRE_LOGIN;dbnamconfig CHEZ VOUSe=VOTRE_LOGIN"); // => À LA FAC
 		self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  // report des erreurs.
 	   }
 	   catch(Exception $e)

@@ -2,13 +2,12 @@
 <?php
 include ('config.php');
 $question = DB::get()->query("SELECT * FROM `launch` natural join question WHERE inProgress = 1");
-if($question->fetch()){
-	/*
-	$idQuestion = $question['question'];
+if($data = $question->fetch()){
+	$idQuestion = $question['id_question'];
 	$libelleQuestion = $question['libelle'];
 
 	$answer = DB::get()->query("SELECT * FROM `answer` WHERE id_question = ".$idQuestion);
-	echo '<h3 id="question" class="question" style=color:#fff"> '.$libelleQuestion.'</h3>'
+	echo '<h3 id="question" class="question" style="color:#fff"> '.$libelleQuestion.'</h3>';
 	$i=0;
 	$rl = "fadeleft";
 	while ($donnees = $answer->fetch())
@@ -21,7 +20,6 @@ if($question->fetch()){
 	</div>';
 	$i++;
 	}
-	*/
 }else{
 	echo "false";
 }
