@@ -2,48 +2,44 @@ $(document).ready(function() {
 	
 
 
-	seconds = 20;
+	seconds = 10;
 	minuteur = false;
-	waitQuestion = true;
-	$("#btnDownload").click(function() {
-		$(this).hide();
-		$(".fadeleft").addClass("fadeInLeft animated");
-		$(".faderight").addClass("fadeInRight animated");
-		$(".choice").show();
-		$("#question").show();
-		$(".minuteur").show();
-		minuteur = true;
-	});
-
-	$(".accueil").after().css("cursor", "pointer"), $(".actualites").after().css("cursor", "pointer"), $(".classement").after().css("cursor", "pointer"), $(".forum").after().css("cursor", "pointer"), $(".medias").after().css("cursor", "pointer"), $(".contact").after().css("cursor", "pointer"), $(".accueil").after().mouseover(function() {
-		$(".accueil a").css("color", "#fff")
-	}), $(".accueil").after().mouseout(function() {
-		$(".accueil a").css("color", "#9d9d9d")
-	}), $(".actualites").after().mouseover(function() {
-		$(".actualites a").css("color", "#fff")
-	}), $(".actualites").after().mouseout(function() {
-		$(".actualites a").css("color", "#9d9d9d")
-	}), $(".accueil").after().click(function() {
-		var o = $(".accueil > a").attr("href");
-		window.location.href = o
-	}), $(".actualites").after().click(function() {
-		var o = $(".actualites > a").attr("href");
-		window.location.href = o
-	})
-	 $(window).on("resize", function() {
-		$(this).width() < 800 ? ($(".formcontact").addClass("col-md-12"), $(".formcontact").removeClass("col-md-6")) : ($(".formcontact").removeClass("col-md-12"), $(".formcontact").addClass("col-md-6"))
-	})
+	waitQuestion = false;
+	waitAdventure = true;
 
     setInterval(function() {
+		if(waitAdventure){
+			$.ajax({
+				url:"./bdd/waitAdventure.php",
+				type:"POST",
+				success:function(retour) {
+					if(retour.trim() != "false"){
+						$('.arch1').hide();
+						$('.arch2').show();
+						waitQuestion = true;
+						waitAdventure = false;
+					}
+				},
+				error:function(xhr, status, error){
+					var err = eval("(" + xhr.responseText + ")");
+					alert(err.Message);
+				}
+			});
+		}
     	if(waitQuestion){
     		$.ajax({
-		        	url:"waitQuestion.php",
+		        	url:"./bdd/waitQuestion.php",
 		        	type:"POST",
 		        	success:function(retour) {
-		        		if(retour != "false"){
-		        			alert(retour);
+		        		if(retour.trim() != "false"){
 		        			$('#panelQuestion').empty().append(retour);
+							$(".arc").hide();
+							$(".arch2").hide();
+							$(".projectname").hide();
+							$(".projectdesc").hide();
+							$(".minuteur").show();
 		        			waitQuestion = false;
+		        			minuteur = true;
 		        		}
 		       		},
 		       		error:function(xhr, status, error){
@@ -56,13 +52,24 @@ $(document).ready(function() {
 			$("#seconds").text(seconds);
 			seconds--;
 			if(seconds<0){
-				minuteur = false;
-				seconds = 20;
 				$('.minuteur').hide();
 				$.ajax({
-		        	url:"minuteur.php",
+					url:"./bdd/minuteur.php",
 		        	type:"POST",
+					data:{
+
+					},
 		        	success:function(retour) {
+						minuteur = false;
+						$('#panelQuestion').empty();
+						$(".arc").show();
+						$(".arch2").show();
+						$(".projectname").show();
+						$(".projectdesc").show();
+						$(".minuteur").hide();
+						seconds = 10;
+						$("#seconds").text(seconds);
+						waitQuestion = true;
 		       		},
 		       		error:function(){
 		        		alert("error");
@@ -72,4 +79,40 @@ $(document).ready(function() {
 		}
 
 	}, 1000);
+
+	idLaunchOld = "";
+	numChoiceOld = "";
+	$(document).on('click','.choice',function(){
+		$(".choice").css('background','rgba(240, 230, 220, .5)');
+		$(this).css('background','rgba(240, 230, 220, .8)');
+		var idLaunch = $('#question').data('id');
+		var numChoice = $(this).data('num');
+		var btn  = $(this);
+		$.ajax({
+			url:"./bdd/vote.php",
+			type:"POST",
+			dataType: "json",
+			data:{
+				idLaunch:idLaunch,
+				numChoice:numChoice,
+				idLaunchOld:idLaunchOld,
+				numChoiceOld:numChoiceOld
+			},
+			success:function(data) {
+				$(".choice").each(function( i ) {
+					var numChoice = $(this).data('num');
+					var nbVote = data[numChoice];
+					if(nbVote)
+						$(this).find('.nbVote').empty().append(nbVote);
+					else
+						$(this).find('.nbVote').empty().append(0);
+				});
+				idLaunchOld = idLaunch;
+				numChoiceOld = numChoice;
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	});
 });
