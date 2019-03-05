@@ -30,6 +30,9 @@
 include ('bdd/config.php');
 
 $data = DB::get()->query('SELECT * FROM launchadventure natural join adventure where inProgress = 1');
+$isAdventure = false;
+if($infos = $data->fetch())
+    $isAdventure = true;
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -60,7 +63,7 @@ $data = DB::get()->query('SELECT * FROM launchadventure natural join adventure w
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center">
             <?php
-            if($infos = $data->fetch()){
+            if($isAdventure){
                 $name = $infos['libelle'];
                 echo "<h2 class='text-white-50 mx-auto mt-2 mb-5 projectdesc'>Aventure en cours : <span style='font-size: 1.2em;'>$name</span></h2>";
             }else{
@@ -69,7 +72,24 @@ $data = DB::get()->query('SELECT * FROM launchadventure natural join adventure w
             ?>
         </div>
     </div>
+    <?php
+
+    if($isAdventure){
+        $name = $infos['libelle'];
+        $data = DB::get()->query('CALL getAllQuestions()');
+        $i =1;
+        while($infos = $data->fetch()){
+            $libelle = $infos['libelle'];
+            $libelleAnswer = $infos['libelleAnswer'];
+            $nb_vote = $infos['nb_vote'];
+            // TODO Affichageo
+        }
+    }
+
+    ?>
 </header>
+
+
 
 <!-- Footer -->
 <footer class="bg-black small text-center text-white-50">
